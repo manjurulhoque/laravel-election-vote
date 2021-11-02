@@ -13,7 +13,7 @@
                 </svg>
 
                 <div class="card-body text-center">
-                    <a href="#" class="btn btn-primary">Voter Registration</a>
+                    <a href="{{ route('voter.register.portal') }}" class="btn btn-primary">Voter Registration</a>
                 </div>
             </div>
         </div>
@@ -27,7 +27,9 @@
                 </svg>
 
                 <div class="card-body text-center">
-                    <a href="#" class="btn btn-primary">Candidate Registration</a>
+                    <a href="{{ route('candidate.register.portal') }}" class="btn btn-primary">
+                        Candidate Registration
+                    </a>
                 </div>
             </div>
         </div>
@@ -41,7 +43,7 @@
                 </svg>
 
                 <div class="card-body text-center">
-                    <a href="#" class="btn btn-primary">Party Registration</a>
+                    <a href="{{ route('party.register.portal') }}" class="btn btn-primary">Party Registration</a>
                 </div>
             </div>
         </div>

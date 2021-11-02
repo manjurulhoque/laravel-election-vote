@@ -18,6 +18,21 @@ class HomeController extends Controller
 
     public function register_portal()
     {
-        return view('register-portal');
+        return view('register-portal.index');
+    }
+
+    public function voter_register_portal()
+    {
+        return view('register-portal.index');
+    }
+
+    public function candidate_register_portal()
+    {
+        return view('register-portal.index');
+    }
+
+    public function party_register_portal()
+    {
+        return view('register-portal.index');
     }
 }
