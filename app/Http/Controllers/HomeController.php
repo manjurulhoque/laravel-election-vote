@@ -28,7 +28,7 @@ class HomeController extends Controller
         return view('register-portal.voter');
     }
 
-    public function voter_register_submit(Request $request)
+    public function register_submit(Request $request)
     {
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
@@ -43,7 +43,7 @@ class HomeController extends Controller
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
-            'role' => 'voter'
+            'role' => $request->get('role')
         ]);
 
         return redirect()->route('login');

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-info text-white">Register as voter</div>
+                <div class="card-header bg-info text-white">Register as candidate</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register.submit') }}">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="role" value="voter">
+                        <input type="hidden" name="role" value="candidate">
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
