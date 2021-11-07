@@ -10,6 +10,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('visions', App\Http\Controllers\VisionController::class)->except(['destroy']);
 
 Route::get('/register-portal', [App\Http\Controllers\HomeController::class, 'register_portal'])->name('register.portal');
 Route::get('/voter-register-portal', [App\Http\Controllers\HomeController::class, 'voter_register_portal'])->name('voter.register.portal');

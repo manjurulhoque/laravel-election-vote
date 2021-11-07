@@ -18,6 +18,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('styles')
 </head>
 <body>
 <div id="app">
@@ -65,6 +67,13 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                @if(auth()->user()->role == 'candidate')
+                                    <a class="dropdown-item" href="{{ route('visions.create') }}">
+                                        My Vision
+                                    </a>
+                                @endif
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -88,5 +97,7 @@
         </div>
     </main>
 </div>
+
+@yield('scripts')
 </body>
 </html>

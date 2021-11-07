@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class VisionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['candidate']);
+    }
+
     public function index()
     {
         //
@@ -14,7 +19,11 @@ class VisionController extends Controller
 
     public function create()
     {
-        //
+        $vision = auth()->user()->vision;
+        if ($vision) {
+            return redirect(route('visions.edit', $vision->id));
+        }
+        return view('candidate.visions.create');
     }
 
     public function store(Request $request)
@@ -33,11 +42,6 @@ class VisionController extends Controller
     }
 
     public function update(Request $request, Vision $vision)
-    {
-        //
-    }
-
-    public function destroy(Vision $vision)
     {
         //
     }
