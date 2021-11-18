@@ -28,7 +28,16 @@ class VisionController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'description' => ['required']
+        ]);
+
+        $vision = Vision::create([
+            'user_id' => auth()->id(),
+            'description' => $request->get('description')
+        ]);
+
+        return redirect(route('visions.edit', $vision->id));
     }
 
     public function show(Vision $vision)
@@ -38,11 +47,20 @@ class VisionController extends Controller
 
     public function edit(Vision $vision)
     {
-        //
+        if ($vision->user_id != auth()->id()) {
+            return abort(403, "You are not authorized to view this resource");
+        }
+        return view('candidate.visions.edit', compact('vision'));
     }
 
     public function update(Request $request, Vision $vision)
     {
-        //
+        if ($vision->user_id != auth()->id()) {
+            return abort(403, "You are not authorized to view this resource");
+        }
+
+        $vision->description = $request->get('description');
+        $vision->save();
+        return redirect(route('visions.edit', $vision->id));
     }
 }

@@ -58,4 +58,10 @@ class HomeController extends Controller
     {
         return view('register-portal.party');
     }
+
+    public function candidates()
+    {
+        $candidates = User::where('role', 'candidate')->with('vision')->get();
+        return view("candidate.list", compact('candidates'));
+    }
 }

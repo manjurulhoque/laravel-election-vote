@@ -19,15 +19,15 @@
 
 @section('content')
 
-    <form action="{{ route('visions.store') }}">
+    <form action="{{ route('visions.store') }}" method="post">
         @csrf
         <div class="form-group">
-            <label for="description">My visions</label>
+            <label for="description">Create my visions</label>
             <textarea name="description" rows="20" class="form-control" id="description"></textarea>
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-outline-success float-right">Update</button>
+            <button type="submit" class="btn btn-outline-success float-right">Create</button>
         </div>
     </form>
 

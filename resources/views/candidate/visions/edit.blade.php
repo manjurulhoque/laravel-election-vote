@@ -4,10 +4,10 @@
 @endsection
 
 @section('scripts')
-{{--        <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>--}}
-{{--        <script type="text/javascript">--}}
-{{--            CKEDITOR.replace('description');--}}
-{{--        </script>--}}
+    {{--        <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>--}}
+    {{--        <script type="text/javascript">--}}
+    {{--            CKEDITOR.replace('description');--}}
+    {{--        </script>--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.1/tinymce.min.js"></script>
     <script>
         tinymce.init({
@@ -19,11 +19,14 @@
 
 @section('content')
 
-    <form action="{{ route('visions.store') }}">
+    <form action="{{ route('visions.update', $vision->id) }}" method="post">
         @csrf
+        @method('PUT')
         <div class="form-group">
-            <label for="description">My visions</label>
-            <textarea name="description" rows="20" class="form-control" id="description"></textarea>
+            <label for="description">Update my visions</label>
+            <textarea name="description" rows="20" class="form-control" id="description">
+                {{ $vision->description }}
+            </textarea>
         </div>
 
         <div class="form-group">
