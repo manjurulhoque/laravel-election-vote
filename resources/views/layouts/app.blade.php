@@ -76,6 +76,9 @@
                                     <a class="dropdown-item" href="{{ route('visions.create') }}">
                                         My Vision
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('candidate.profile') }}">
+                                        My Profile
+                                    </a>
                                 @endif
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"

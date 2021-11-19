@@ -8,12 +8,18 @@
             <div class="col-md-4 col-sm-4">
                 <div class="card">
                     <h5 class="card-header">{{$candidate->name}}</h5>
-                    <div class="card-body text-center">
-                        @if($candidate->vision)
-                            <p class="card-text">{!! $candidate->vision->description !!}</p>
+                    <div class="card-body">
+                        @if(!isset($candidate->image))
+                            <img src="{{ asset('img/default.png') }}" alt="" class="bd-placeholder-img card-img-top">
                         @else
-                            <p class="card-text">No vision found!</p>
+                            <img src="{{ asset($candidate->image) }}" alt="" class="bd-placeholder-img card-img-top">
                         @endif
+
+                        <div class="card-body text-center">
+                            <a href="{{ route('candidates.view', $candidate->id) }}" class="btn btn-primary">
+                                View candidate
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
