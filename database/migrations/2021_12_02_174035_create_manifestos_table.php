@@ -15,6 +15,8 @@ class CreateManifestosTable extends Migration
     {
         Schema::create('manifestos', function (Blueprint $table) {
             $table->id();
+            $table->longText('description');
+            $table->boolean('submitted')->default(false);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ManifestoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'candidate']);
+    }
+
     public function index()
     {
         //
