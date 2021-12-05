@@ -22,3 +22,5 @@ Route::get('/voter-register-portal', [App\Http\Controllers\HomeController::class
 Route::post('/register-portal', [App\Http\Controllers\HomeController::class, 'register_submit'])->name('register.submit');
 Route::get('/candidate-register-portal', [App\Http\Controllers\HomeController::class, 'candidate_register_portal'])->name('candidate.register.portal');
 Route::get('/party-register-portal', [App\Http\Controllers\HomeController::class, 'party_register_portal'])->name('party.register.portal');
+
+Route::resource('posts', App\Http\Controllers\PostController::class);
