@@ -24,3 +24,4 @@ Route::get('/candidate-register-portal', [App\Http\Controllers\HomeController::c
 Route::get('/party-register-portal', [App\Http\Controllers\HomeController::class, 'party_register_portal'])->name('party.register.portal');
 
 Route::resource('posts', App\Http\Controllers\PostController::class);
+Route::resource('comments', App\Http\Controllers\CommentController::class)->only(['store']);

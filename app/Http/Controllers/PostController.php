@@ -14,7 +14,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::select("*")->orderBy("created_at", "desc")->get();
+        $posts = Post::select("*")->with('user', 'comments')->orderBy("created_at", "desc")->get();
 
         return view('posts.index', compact('posts'));
     }
@@ -28,7 +28,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'description' => 'required'
+            'description' => 'required|string'
         ]);
 
         $new_post = new Post();
