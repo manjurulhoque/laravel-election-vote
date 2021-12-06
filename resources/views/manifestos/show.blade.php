@@ -6,7 +6,7 @@
         <div class="card-header">
             <p class="float-left">Our Manifesto</p>
             @if(!$manifesto->submitted)
-                <a href="" class="btn btn-success float-right">Edit</a>
+                <a href="{{ route('edit.manifesto') }}" class="btn btn-success float-right">Edit</a>
                 <button class="btn btn-primary float-right mr-1" data-toggle="modal" data-target="#exampleModal">Submit
                     Manifesto
                 </button>

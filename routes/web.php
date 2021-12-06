@@ -28,3 +28,5 @@ Route::resource('comments', App\Http\Controllers\CommentController::class)->only
 Route::get('our-manifesto', [App\Http\Controllers\ManifestoController::class, 'our_manifesto'])->name('our.manifesto');
 Route::get('submit-manifesto', [App\Http\Controllers\ManifestoController::class, 'submit_manifesto'])->name('submit.manifesto');
 Route::post('our-manifesto', [App\Http\Controllers\ManifestoController::class, 'store'])->name('store.manifesto');
+Route::get('edit-manifesto', [App\Http\Controllers\ManifestoController::class, 'edit'])->name('edit.manifesto');
+Route::post('update-manifesto', [App\Http\Controllers\ManifestoController::class, 'update'])->name('update.manifesto');
