@@ -85,7 +85,7 @@
                                 @endif
 
                                 @if(auth()->user()->role == 'party')
-                                    <a class="dropdown-item" href="{{ route('visions.create') }}">
+                                    <a class="dropdown-item" href="{{ route('our.manifesto') }}">
                                         Our Manifesto
                                     </a>
                                 @endif
@@ -109,6 +109,7 @@
 
     <main class="py-4">
         <div class="container">
+            @include('layouts.flash')
             @yield('content')
         </div>
     </main>

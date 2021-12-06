@@ -9,47 +9,45 @@ class ManifestoController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'candidate']);
+        $this->middleware(['auth', 'party']);
     }
 
-    public function index()
+    public function our_manifesto()
     {
-        //
+        $manifesto = Manifesto::where('user_id', auth()->id())->first();
+
+        if ($manifesto) {
+            return view('manifestos.show', compact('manifesto'));
+        }
+
+        return view('manifestos.create');
     }
-
-
-    public function create()
-    {
-        //
-    }
-
 
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'description' => 'required|string'
+        ]);
+
+        $new_manifesto = new Manifesto();
+        $new_manifesto->description = $request->get('description');
+        $new_manifesto->user_id = auth()->id();
+        $new_manifesto->save();
+
+        return redirect(route('our.manifesto'));
     }
 
-
-    public function show(Manifesto $manifesto)
+    public function submit_manifesto()
     {
-        //
-    }
+        $manifesto = Manifesto::where('user_id', auth()->id())->first();
 
+        if($manifesto) {
+            $manifesto->submitted = true;
+            $manifesto->save();
 
-    public function edit(Manifesto $manifesto)
-    {
-        //
-    }
+            return back()->with('success', "Manifesto submitted successfully");
+        }
 
-
-    public function update(Request $request, Manifesto $manifesto)
-    {
-        //
-    }
-
-
-    public function destroy(Manifesto $manifesto)
-    {
-        //
+        return back()->with('error', "You don't have any manifesto yet. please create one first");
     }
 }

@@ -25,3 +25,6 @@ Route::get('/party-register-portal', [App\Http\Controllers\HomeController::class
 
 Route::resource('posts', App\Http\Controllers\PostController::class);
 Route::resource('comments', App\Http\Controllers\CommentController::class)->only(['store']);
+Route::get('our-manifesto', [App\Http\Controllers\ManifestoController::class, 'our_manifesto'])->name('our.manifesto');
+Route::get('submit-manifesto', [App\Http\Controllers\ManifestoController::class, 'submit_manifesto'])->name('submit.manifesto');
+Route::post('our-manifesto', [App\Http\Controllers\ManifestoController::class, 'store'])->name('store.manifesto');
