@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Vision::class);
     }
+
+    public function party_candidates()
+    {
+        return $this->hasMany(PartyCandidate::class, 'party_id', 'id');
+    }
 }

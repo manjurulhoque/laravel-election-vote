@@ -85,6 +85,12 @@
                                 @endif
 
                                 @if(auth()->user()->role == 'party')
+                                    <a class="dropdown-item" href="{{ route('selected.candidates') }}">
+                                        Our candidates
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('all.candidates.to.select') }}">
+                                        Select candidate
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('our.manifesto') }}">
                                         Our Manifesto
                                     </a>
