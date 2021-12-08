@@ -32,10 +32,10 @@ Route::get('edit-manifesto', [App\Http\Controllers\ManifestoController::class, '
 Route::post('update-manifesto', [App\Http\Controllers\ManifestoController::class, 'update'])->name('update.manifesto');
 
 Route::get('selected-candidates/', [\App\Http\Controllers\PartyCandidateController::class, 'index'])
-    ->name('selected.candidates')->middleware(['party']);
+    ->name('selected.candidates')->middleware(['auth', 'party']);
 
 Route::get('all-candidates-to-select/', [\App\Http\Controllers\PartyCandidateController::class, 'all_candidates_to_select'])
-    ->name('all.candidates.to.select')->middleware(['party']);
+    ->name('all.candidates.to.select')->middleware(['auth', 'party']);
 
 Route::get('select-candidate/{id}', [\App\Http\Controllers\PartyCandidateController::class, 'select_candidate'])
-    ->name('select.candidate')->middleware(['party']);
+    ->name('select.candidate')->middleware(['auth', 'party']);
