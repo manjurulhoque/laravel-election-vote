@@ -22,3 +22,20 @@ Route::get('/voter-register-portal', [App\Http\Controllers\HomeController::class
 Route::post('/register-portal', [App\Http\Controllers\HomeController::class, 'register_submit'])->name('register.submit');
 Route::get('/candidate-register-portal', [App\Http\Controllers\HomeController::class, 'candidate_register_portal'])->name('candidate.register.portal');
 Route::get('/party-register-portal', [App\Http\Controllers\HomeController::class, 'party_register_portal'])->name('party.register.portal');
+
+Route::resource('posts', App\Http\Controllers\PostController::class);
+Route::resource('comments', App\Http\Controllers\CommentController::class)->only(['store']);
+Route::get('our-manifesto', [App\Http\Controllers\ManifestoController::class, 'our_manifesto'])->name('our.manifesto');
+Route::get('submit-manifesto', [App\Http\Controllers\ManifestoController::class, 'submit_manifesto'])->name('submit.manifesto');
+Route::post('our-manifesto', [App\Http\Controllers\ManifestoController::class, 'store'])->name('store.manifesto');
+Route::get('edit-manifesto', [App\Http\Controllers\ManifestoController::class, 'edit'])->name('edit.manifesto');
+Route::post('update-manifesto', [App\Http\Controllers\ManifestoController::class, 'update'])->name('update.manifesto');
+
+Route::get('selected-candidates/', [\App\Http\Controllers\PartyCandidateController::class, 'index'])
+    ->name('selected.candidates')->middleware(['auth', 'party']);
+
+Route::get('all-candidates-to-select/', [\App\Http\Controllers\PartyCandidateController::class, 'all_candidates_to_select'])
+    ->name('all.candidates.to.select')->middleware(['auth', 'party']);
+
+Route::get('select-candidate/{id}', [\App\Http\Controllers\PartyCandidateController::class, 'select_candidate'])
+    ->name('select.candidate')->middleware(['auth', 'party']);

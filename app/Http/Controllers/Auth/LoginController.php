@@ -46,6 +46,9 @@ class LoginController extends Controller
         if (auth()->user()->role == 'candidate') {
             return "/";
         }
+        if (auth()->user()->role == 'party') {
+            return "/";
+        }
         return $this->redirectTo;
     }
 }

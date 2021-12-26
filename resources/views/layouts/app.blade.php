@@ -46,6 +46,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('candidates.list') }}">Candidates</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
+                    </li>
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
@@ -81,6 +84,18 @@
                                     </a>
                                 @endif
 
+                                @if(auth()->user()->role == 'party')
+                                    <a class="dropdown-item" href="{{ route('selected.candidates') }}">
+                                        Our candidates
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('all.candidates.to.select') }}">
+                                        Select candidate
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('our.manifesto') }}">
+                                        Our Manifesto
+                                    </a>
+                                @endif
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -100,6 +115,7 @@
 
     <main class="py-4">
         <div class="container">
+            @include('layouts.flash')
             @yield('content')
         </div>
     </main>
