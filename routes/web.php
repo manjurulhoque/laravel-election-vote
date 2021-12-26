@@ -41,3 +41,4 @@ Route::get('select-candidate/{id}', [\App\Http\Controllers\PartyCandidateControl
     ->name('select.candidate')->middleware(['auth', 'party']);
 
 Route::get('voters', [\App\Http\Controllers\ElectionCommissionController::class, 'voter_list'])->name('voter.list');
+Route::resource('notices', \App\Http\Controllers\NoticeBoardController::class);
