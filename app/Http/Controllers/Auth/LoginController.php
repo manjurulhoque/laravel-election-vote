@@ -43,12 +43,6 @@ class LoginController extends Controller
      */
     protected function redirectTo(): string
     {
-        if (auth()->user()->role == 'candidate') {
-            return "/";
-        }
-        if (auth()->user()->role == 'party') {
-            return "/";
-        }
-        return $this->redirectTo;
+        return "/";
     }
 }

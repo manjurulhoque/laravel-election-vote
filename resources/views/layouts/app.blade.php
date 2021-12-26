@@ -96,6 +96,12 @@
                                     </a>
                                 @endif
 
+                                @if(auth()->user()->role == 'election')
+                                    <a class="dropdown-item" href="{{ route('voter.list') }}">
+                                        Voter list
+                                    </a>
+                                @endif
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

@@ -39,3 +39,5 @@ Route::get('all-candidates-to-select/', [\App\Http\Controllers\PartyCandidateCon
 
 Route::get('select-candidate/{id}', [\App\Http\Controllers\PartyCandidateController::class, 'select_candidate'])
     ->name('select.candidate')->middleware(['auth', 'party']);
+
+Route::get('voters', [\App\Http\Controllers\ElectionCommissionController::class, 'voter_list'])->name('voter.list');
