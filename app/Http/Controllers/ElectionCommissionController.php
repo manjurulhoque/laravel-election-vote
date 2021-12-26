@@ -14,7 +14,7 @@ class ElectionCommissionController extends Controller
 
     public function voter_list()
     {
-        $voters = User::where('role', 'voter')->get();
+        $voters = User::where('role', 'voter')->paginate(9);
         return view('election-commission.voter-list', compact('voters'));
     }
 }
