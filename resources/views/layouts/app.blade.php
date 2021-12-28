@@ -103,6 +103,9 @@
                                     <a class="dropdown-item" href="{{ route('voter.list') }}">
                                         Voter list
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('notices.create') }}">
+                                        Create notice
+                                    </a>
                                 @endif
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"

@@ -18,67 +18,40 @@ class NoticeBoardController extends Controller
         return view('notices.index', compact('notices'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('notices.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        $new_notice = NoticeBoard::create($request->all());
+
+        return redirect(route('notices.show', $new_notice->id))->with('success', 'Notice created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\NoticeBoard  $noticeBoard
-     * @return \Illuminate\Http\Response
-     */
-    public function show(NoticeBoard $noticeBoard)
+    public function show($id)
     {
-        //
+        $notice = NoticeBoard::find($id);
+
+        return view('notices.show', compact('notice'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\NoticeBoard  $noticeBoard
-     * @return \Illuminate\Http\Response
-     */
     public function edit(NoticeBoard $noticeBoard)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\NoticeBoard  $noticeBoard
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, NoticeBoard $noticeBoard)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\NoticeBoard  $noticeBoard
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(NoticeBoard $noticeBoard)
     {
         //
