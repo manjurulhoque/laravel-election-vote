@@ -9,7 +9,7 @@ class NoticeBoardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'election-commission'])->only('create', 'update', 'delete');
+        $this->middleware(['auth', 'election-commission'])->except('index', 'show');
     }
 
     public function index()
@@ -37,23 +37,37 @@ class NoticeBoardController extends Controller
 
     public function show($id)
     {
-        $notice = NoticeBoard::find($id);
+        $notice = NoticeBoard::findOrFail($id);
 
         return view('notices.show', compact('notice'));
     }
 
-    public function edit(NoticeBoard $noticeBoard)
+    public function edit($id)
     {
-        //
+        $notice = NoticeBoard::findOrFail($id);
+
+        return view('notices.edit', compact('notice'));
     }
 
-    public function update(Request $request, NoticeBoard $noticeBoard)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        $notice = NoticeBoard::findOrFail($id);
+        $notice->fill($request->all())->save();
+
+        return redirect(route('notices.show', $notice->id))->with('success', 'Notice updated successfully');
     }
 
-    public function destroy(NoticeBoard $noticeBoard)
+    public function destroy($id)
     {
-        //
+        $notice = NoticeBoard::findOrFail($id);
+
+        $notice->delete();
+
+        return back()->with('success', 'Notice deleted successfully');
     }
 }
