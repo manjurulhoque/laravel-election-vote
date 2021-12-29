@@ -16,7 +16,7 @@
                         @endif
 
                         <div class="card-body text-center">
-                            <a href="{{ route('candidates.view', $party->id) }}" class="btn btn-primary">
+                            <a href="{{ route('party.profile', $party->id) }}" class="btn btn-success">
                                 View party profile
                             </a>
                         </div>
