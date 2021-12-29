@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PartyCandidate;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,9 @@ class CandidateController extends Controller
         $candidate = User::find($id);
         if (!$candidate) return abort(404);
 
-        return view('candidate.show', compact('candidate'));
+        $party = PartyCandidate::where('candidate_id', $candidate->id)->first();
+
+        return view('candidate.show', compact('candidate', 'party'));
     }
 
     public function edit()

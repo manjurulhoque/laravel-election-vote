@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(PartyCandidate::class, 'party_id', 'id');
     }
+
+    public function party()
+    {
+        return $this->belongsTo(User::class, 'party_id', 'id');
+    }
 }
