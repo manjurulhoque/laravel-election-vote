@@ -11,6 +11,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/candidates', [App\Http\Controllers\HomeController::class, 'candidates'])->name('candidates.list');
+Route::get('/parties', [App\Http\Controllers\HomeController::class, 'parties'])->name('parties.list');
 Route::get('/candidates/{id}', [App\Http\Controllers\CandidateController::class, 'show'])->name('candidates.view');
 Route::get('/candidate-profile', [App\Http\Controllers\CandidateController::class, 'profile'])->name('candidate.profile');
 Route::get('/candidate-profile-edit', [App\Http\Controllers\CandidateController::class, 'edit'])->name('candidate.profile.edit');
@@ -43,3 +44,5 @@ Route::get('select-candidate/{id}', [\App\Http\Controllers\PartyCandidateControl
 Route::get('voters', [\App\Http\Controllers\ElectionCommissionController::class, 'voter_list'])->name('voter.list');
 Route::resource('notices', \App\Http\Controllers\NoticeBoardController::class);
 Route::resource('elections', \App\Http\Controllers\ElectionController::class);
+Route::get('upload-profile-image', [\App\Http\Controllers\HomeController::class, 'upload_profile_image'])->name('upload.profile.image');
+Route::put('upload-profile-image', [\App\Http\Controllers\HomeController::class, 'save_profile_image'])->name('store.profile.image');

@@ -50,6 +50,9 @@
                         <a class="nav-link" href="{{ route('candidates.list') }}">Candidates</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('parties.list') }}">Parties</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
                     </li>
                     <!-- Authentication Links -->
@@ -96,6 +99,9 @@
                                     </a>
                                     <a class="dropdown-item" href="{{ route('our.manifesto') }}">
                                         Our Manifesto
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('upload.profile.image') }}">
+                                        Upload profile image
                                     </a>
                                 @endif
 

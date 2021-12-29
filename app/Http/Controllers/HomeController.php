@@ -64,4 +64,34 @@ class HomeController extends Controller
         $candidates = User::where('role', 'candidate')->with('vision')->get();
         return view("candidate.list", compact('candidates'));
     }
+
+    public function parties()
+    {
+        $parties = User::where('role', 'party')->get();
+        return view("party.index", compact('parties'));
+    }
+
+    public function upload_profile_image()
+    {
+        $user = auth()->user();
+
+        return view('edit', compact('user'));
+    }
+
+    public function save_profile_image(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $imageName = 'img/' . time() . '.' . $request->image->extension();
+
+        $request->image->move(public_path('img'), $imageName);
+
+        $user = auth()->user();
+        $user->image = $imageName;
+        $user->save();
+
+        return back()->with('success', 'Profile updated successfully');
+    }
 }
