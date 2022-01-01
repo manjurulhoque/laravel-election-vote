@@ -9,7 +9,9 @@ class ElectionController extends Controller
 {
     public function index()
     {
-        //
+        $elections = Election::all();
+
+        return view('elections.list', compact('elections'));
     }
 
     public function create()
@@ -37,11 +39,13 @@ class ElectionController extends Controller
         }
 
         $election = Election::create($data);
+
+        return redirect(route('elections.index'));
     }
 
     public function show(Election $election)
     {
-        //
+        return view('elections.show', compact('election'));
     }
 
     public function edit(Election $election)
