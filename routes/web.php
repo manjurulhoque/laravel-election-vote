@@ -3,12 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
+Route::get('/', [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/candidates', [App\Http\Controllers\HomeController::class, 'candidates'])->name('candidates.list');
 Route::get('/parties', [App\Http\Controllers\HomeController::class, 'parties'])->name('parties.list');

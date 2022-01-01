@@ -1,12 +1,32 @@
 @extends('layouts.app')
 
 @section('styles')
-
     <link rel="stylesheet" href="{{ asset('css/feature.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('css/timer.css') }}" type="text/css">
+@endsection
 
+@section('scripts')
+    <script src="{{ asset('js/timer.js') }}" type="text/javascript"></script>
 @endsection
 
 @section('content')
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    @if($election && $election->is_active)
+                        <h4>Running election</h4>
+                        <div id="timer" data-election-start-time="{{ $election->start_time }}"
+                             data-election-end-time="{{ $election->end_date }}"></div>
+                        <a href="" class="btn btn-primary">Vote now</a>
+                    @else
+                        <p class="text-primary">No election is running</p>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="feature_area">
         <div class="container">

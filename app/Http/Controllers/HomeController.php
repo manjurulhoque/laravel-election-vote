@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Election;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +12,12 @@ class HomeController extends Controller
     public function __construct()
     {
 
+    }
+
+    public function welcome()
+    {
+        $election = Election::where('is_active', true)->first();
+        return view('welcome', compact('election'));
     }
 
     public function index()
