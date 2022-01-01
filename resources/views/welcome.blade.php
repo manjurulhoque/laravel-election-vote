@@ -19,7 +19,7 @@
                         <h4>Running election</h4>
                         <div id="timer" data-election-start-time="{{ $election->start_time }}"
                              data-election-end-time="{{ $election->end_date }}"></div>
-                        <a href="" class="btn btn-primary">Vote now</a>
+                        <a href="{{ route('vote.now', $election->id) }}" class="btn btn-primary">Vote now</a>
                     @else
                         <p class="text-primary">No election is running</p>
                     @endif

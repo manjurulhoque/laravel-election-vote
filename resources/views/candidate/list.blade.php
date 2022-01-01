@@ -15,7 +15,7 @@
                             <img src="{{ asset($candidate->image) }}" alt="" class="bd-placeholder-img card-img-top">
                         @endif
 
-                        <div class="card-body text-center">
+                        <div class="text-center">
                             <a href="{{ route('candidates.view', $candidate->id) }}" class="btn btn-primary">
                                 View candidate
                             </a>

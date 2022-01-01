@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Election;
+use App\Models\ElectionResult;
+use App\Models\PartyCandidate;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ElectionController extends Controller
@@ -80,5 +83,45 @@ class ElectionController extends Controller
     public function destroy(Election $election)
     {
         //
+    }
+
+    public function vote_now($id)
+    {
+        $election = Election::findOrFail($id);
+
+        if (!$election->is_active) {
+            return back()->with('warning', 'This is not a running election');
+        }
+
+        $party_candidates = PartyCandidate::all();
+
+        return view('elections.vote-now', compact('election', 'party_candidates'));
+    }
+
+    public function vote_now_store($election_id, $candidate_id)
+    {
+        $election = Election::findOrFail($election_id);
+
+        if (!$election->is_active) {
+            return back()->with('warning', 'This is not a running election');
+        }
+
+        $candidate = User::findOrFail($candidate_id);
+
+        $vote_exists = ElectionResult::where([
+            'election_id' => $election->id,
+            'user_id' => auth()->id(),
+            'candidate_id' => $candidate->id,
+        ])->exists();
+
+        if ($vote_exists) return back()->with('warning', 'You already voted this candidate');
+
+        $vote = ElectionResult::create([
+            'election_id' => $election->id,
+            'user_id' => auth()->id(),
+            'candidate_id' => $candidate->id,
+        ]);
+
+        return back()->with('success', 'Your vote successfully counted');
     }
 }

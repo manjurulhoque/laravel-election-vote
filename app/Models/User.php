@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class, 'party_id', 'id');
     }
+
+    public function get_party($party_id)
+    {
+        return User::where('role', 'party')->where('id', $party_id)->first();
+    }
 }

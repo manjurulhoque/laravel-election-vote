@@ -44,3 +44,5 @@ Route::resource('elections', \App\Http\Controllers\ElectionController::class);
 Route::get('upload-profile-image', [\App\Http\Controllers\HomeController::class, 'upload_profile_image'])->name('upload.profile.image');
 Route::put('upload-profile-image', [\App\Http\Controllers\HomeController::class, 'save_profile_image'])->name('store.profile.image');
 Route::get('party-profile/{id}', [\App\Http\Controllers\PartyController::class, 'party_profile'])->name('party.profile');
+Route::get('vote-now/{id}', [\App\Http\Controllers\ElectionController::class, 'vote_now'])->name('vote.now');
+Route::get('vote-now-count/{election_id}/{candidate_id}', [\App\Http\Controllers\ElectionController::class, 'vote_now_store'])->name('vote.now.store');

@@ -112,6 +112,9 @@
                                     <a class="dropdown-item" href="{{ route('notices.create') }}">
                                         Create notice
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('elections.index') }}">
+                                        Election list
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('elections.create') }}">
                                         Create new election
                                     </a>
