@@ -23,7 +23,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" class="btn btn-success">Submit request</button>
+                            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure? After submission, you wont be able to cancel it.')">Submit request</button>
                         </div>
                     </form>
                 </div>

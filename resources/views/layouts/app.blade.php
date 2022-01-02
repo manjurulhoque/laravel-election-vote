@@ -91,6 +91,9 @@
                                     <a class="dropdown-item" href="{{ route('request.to.party') }}">
                                         Request to party
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('request.status') }}">
+                                        Request status
+                                    </a>
                                 @endif
 
                                 @if(auth()->user()->role == 'party')

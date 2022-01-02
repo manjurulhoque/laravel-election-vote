@@ -54,6 +54,13 @@ class CandidateController extends Controller
         return redirect(route('candidate.profile'));
     }
 
+    public function request_status()
+    {
+        $party_candidates = PartyCandidate::where('candidate_id', auth()->id())->get();
+
+        return view('party.check-status', compact('party_candidates'));
+    }
+
     public function request_to_party()
     {
         $party_candidate = PartyCandidate::where('candidate_id', auth()->id())->first();
@@ -98,6 +105,6 @@ class CandidateController extends Controller
             'status' => 'Requested',
         ]);
 
-        return back()->with('success', 'Your request is successfully submitted');
+        return redirect(route('welcome'))->with('success', 'Your request is successfully submitted');
     }
 }
