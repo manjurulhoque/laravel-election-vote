@@ -6,6 +6,7 @@ use App\Models\Election;
 use App\Models\ElectionResult;
 use App\Models\PartyCandidate;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ElectionController extends Controller
@@ -106,22 +107,32 @@ class ElectionController extends Controller
             return back()->with('warning', 'This is not a running election');
         }
 
-        $candidate = User::findOrFail($candidate_id);
+        $start_date = new Carbon($election->start_date);
+        $end_date = new Carbon($election->end_date);
 
-        $vote_exists = ElectionResult::where([
-            'election_id' => $election->id,
-            'user_id' => auth()->id(),
-            'candidate_id' => $candidate->id,
-        ])->exists();
+        $dt = Carbon::now();
 
-        if ($vote_exists) return back()->with('warning', 'You already voted this candidate');
+        if ($dt >= $start_date && $dt <= $end_date) {
 
-        $vote = ElectionResult::create([
-            'election_id' => $election->id,
-            'user_id' => auth()->id(),
-            'candidate_id' => $candidate->id,
-        ]);
+            $candidate = User::findOrFail($candidate_id);
 
-        return back()->with('success', 'Your vote successfully counted');
+            $vote_exists = ElectionResult::where([
+                'election_id' => $election->id,
+                'user_id' => auth()->id(),
+                'candidate_id' => $candidate->id,
+            ])->exists();
+
+            if ($vote_exists) return back()->with('warning', 'You already voted this candidate');
+
+            $vote = ElectionResult::create([
+                'election_id' => $election->id,
+                'user_id' => auth()->id(),
+                'candidate_id' => $candidate->id,
+            ]);
+
+            return back()->with('success', 'Your vote successfully counted');
+        } else {
+            return back()->with('warning', "Election isn't started yet");
+        }
     }
 }
