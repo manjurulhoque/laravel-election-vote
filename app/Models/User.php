@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'state', // national or city corporation election
     ];
 
     /**
