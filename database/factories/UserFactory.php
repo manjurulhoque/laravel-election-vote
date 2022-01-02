@@ -38,4 +38,13 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    public function candidate()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'role' => 'candidate',
+            ];
+        });
+    }
 }

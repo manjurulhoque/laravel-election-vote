@@ -9,6 +9,8 @@ class PartyCandidate extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['party_id', 'candidate_id', 'status'];
+
     public function party()
     {
         return $this->belongsTo(User::class, 'party_id', 'id');

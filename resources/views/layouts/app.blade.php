@@ -88,6 +88,9 @@
                                     <a class="dropdown-item" href="{{ route('candidate.profile') }}">
                                         My Profile
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('request.to.party') }}">
+                                        Request to party
+                                    </a>
                                 @endif
 
                                 @if(auth()->user()->role == 'party')
