@@ -35,6 +35,12 @@ Route::get('selected-candidates/', [\App\Http\Controllers\PartyCandidateControll
 Route::get('all-candidates-to-select/', [\App\Http\Controllers\PartyCandidateController::class, 'all_candidates_to_select'])
     ->name('all.candidates.to.select')->middleware(['auth', 'party']);
 
+Route::get('accept-candidate/{id}', [\App\Http\Controllers\PartyCandidateController::class, 'accept_candidate'])
+    ->name('accept.candidate')->middleware(['auth', 'party']);
+
+Route::get('reject-candidate/{id}', [\App\Http\Controllers\PartyCandidateController::class, 'reject_candidate'])
+    ->name('reject.candidate')->middleware(['auth', 'party']);
+
 Route::get('select-candidate/{id}', [\App\Http\Controllers\PartyCandidateController::class, 'select_candidate'])
     ->name('select.candidate')->middleware(['auth', 'party']);
 
