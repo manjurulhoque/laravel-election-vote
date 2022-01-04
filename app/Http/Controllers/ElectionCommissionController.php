@@ -21,7 +21,7 @@ class ElectionCommissionController extends Controller
 
     public function profile()
     {
-        $commission = auth()->user();
+        $commission = User::where('role', 'commission')->first();
         $notices = NoticeBoard::all();
         return view('election-commission.profile', compact('commission', 'notices'));
     }
