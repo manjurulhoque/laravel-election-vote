@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\NoticeBoard;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,5 +17,12 @@ class ElectionCommissionController extends Controller
     {
         $voters = User::where('role', 'voter')->paginate(9);
         return view('election-commission.voter-list', compact('voters'));
+    }
+
+    public function profile()
+    {
+        $commission = auth()->user();
+        $notices = NoticeBoard::all();
+        return view('election-commission.profile', compact('commission', 'notices'));
     }
 }

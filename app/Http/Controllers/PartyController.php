@@ -10,7 +10,7 @@ class PartyController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('party');
+        $this->middleware('party')->except('party_profile');
     }
 
     public function party_profile($id)

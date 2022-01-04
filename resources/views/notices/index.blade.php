@@ -13,6 +13,7 @@
                                 @csrf
                                 @method("DELETE")
                             </form>
+                            <a href="{{ route('notices.show', $notice->id) }}" class="btn btn-sm btn-dark">Show</a>
                             <a href="{{ route('notices.edit', $notice->id) }}" class="btn btn-sm btn-success">Edit</a>
                             <a href="{{ route('notices.destroy', $notice->id) }}"
                                class="btn btn-sm btn-danger" onclick="event.preventDefault();

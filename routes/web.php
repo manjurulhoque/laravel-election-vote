@@ -7,8 +7,8 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'welcome'])->name('welcome');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/candidates', [App\Http\Controllers\HomeController::class, 'candidates'])->name('candidates.list');
-Route::get('/parties', [App\Http\Controllers\HomeController::class, 'parties'])->name('parties.list');
+Route::get('/candidates', [App\Http\Controllers\HomeController::class, 'candidates'])->name('candidates.list')->middleware(['auth']);
+Route::get('/parties', [App\Http\Controllers\HomeController::class, 'parties'])->name('parties.list')->middleware(['auth']);
 Route::get('/candidates/{id}', [App\Http\Controllers\CandidateController::class, 'show'])->name('candidates.view');
 Route::get('/candidate-profile', [App\Http\Controllers\CandidateController::class, 'profile'])->name('candidate.profile');
 Route::get('/candidate-profile-edit', [App\Http\Controllers\CandidateController::class, 'edit'])->name('candidate.profile.edit');
@@ -55,3 +55,4 @@ Route::get('vote-now-count/{election_id}/{candidate_id}', [\App\Http\Controllers
 Route::get('request-to-party', [\App\Http\Controllers\CandidateController::class, 'request_to_party'])->name('request.to.party');
 Route::post('submit-request-to-party', [\App\Http\Controllers\CandidateController::class, 'request_to_party_submit'])->name('request.to.party.submit');
 Route::get('request-status', [\App\Http\Controllers\CandidateController::class, 'request_status'])->name('request.status');
+Route::get('election-commission', [\App\Http\Controllers\ElectionCommissionController::class, 'profile'])->name('election.commission.profile');

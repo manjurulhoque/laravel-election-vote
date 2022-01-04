@@ -18,13 +18,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"/>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/litera/bootstrap.min.css" rel="stylesheet">
 
     @yield('styles')
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
@@ -44,24 +44,28 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('notices.index') }}">Notice board</a>
+                        <a class="nav-link text-white" href="{{ route('notices.index') }}">Notice board</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('candidates.list') }}">Candidates</a>
+                        <a class="nav-link text-white" href="{{ route('candidates.list') }}">Candidates</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('parties.list') }}">Parties</a>
+                        <a class="nav-link text-white" href="{{ route('parties.list') }}">Parties</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ route('election.commission.profile') }}">Election
+                            commission profile</a>
                     </li>
                     <!-- Authentication Links -->
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                         @endif
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register.portal') }}">Register portal</a>
+                            <a class="nav-link text-white" href="{{ route('register.portal') }}">Register portal</a>
                         </li>
 
                         {{--                            @if (Route::has('register'))--}}
@@ -71,84 +75,88 @@
                         {{--                            @endif--}}
                     @else
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                        @if(auth()->user()->role == 'candidate')
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
-                            </li>
-                            <a class="dropdown-item" href="{{ route('visions.create') }}">
-                                My Vision
-                            </a>
-                            <a class="dropdown-item" href="{{ route('candidate.profile') }}">
-                                My Profile
-                            </a>
-                            <a class="dropdown-item" href="{{ route('request.to.party') }}">
-                                Request to party
-                            </a>
-                            <a class="dropdown-item" href="{{ route('request.status') }}">
-                                Request status
-                            </a>
-                        @endif
+                                @if(auth()->user()->role == 'candidate')
+                                    <a class="dropdown-item" href="{{ route('posts.index') }}">Posts</a>
+                                    <a class="dropdown-item" href="{{ route('visions.create') }}">
+                                        My Vision
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('candidate.profile') }}">
+                                        My Profile
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('request.to.party') }}">
+                                        Request to party
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('request.status') }}">
+                                        Request status
+                                    </a>
+                                @endif
 
-                        @if(auth()->user()->role == 'party')
-                            <a class="dropdown-item" href="{{ route('selected.candidates') }}">
-                                Our candidates
-                            </a>
-                            <a class="dropdown-item" href="{{ route('all.candidates.to.select') }}">
-                                Select candidate
-                            </a>
-                            <a class="dropdown-item" href="{{ route('our.manifesto') }}">
-                                Our Manifesto
-                            </a>
-                            <a class="dropdown-item" href="{{ route('upload.profile.image') }}">
-                                Upload profile image
-                            </a>
-                        @endif
+                                @if(auth()->user()->role == 'party')
+                                    <a class="dropdown-item" href="{{ route('selected.candidates') }}">
+                                        Our candidates
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('all.candidates.to.select') }}">
+                                        Select candidate
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('our.manifesto') }}">
+                                        Our Manifesto
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('upload.profile.image') }}">
+                                        Upload profile image
+                                    </a>
+                                @endif
 
-                        @if(auth()->user()->role == 'election')
-                            <a class="dropdown-item" href="{{ route('voter.list') }}">
-                                Voter list
-                            </a>
-                            <a class="dropdown-item" href="{{ route('notices.create') }}">
-                                Create notice
-                            </a>
-                            <a class="dropdown-item" href="{{ route('elections.index') }}">
-                                Election list
-                            </a>
-                            <a class="dropdown-item" href="{{ route('elections.create') }}">
-                                Create new election
-                            </a>
-                        @endif
+                                @if(auth()->user()->role == 'election')
+                                    <a class="dropdown-item" href="{{ route('parties.list') }}">
+                                        Party list
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('voter.list') }}">
+                                        Voter list
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('notices.create') }}">
+                                        Create notice
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('elections.index') }}">
+                                        Election list
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('elections.create') }}">
+                                        Create new election
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('upload.profile.image') }}">
+                                        Upload profile image
+                                    </a>
+                                @endif
 
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
+                                    {{ __('Logout') }}
+                                </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
+                    @endguest
+                </ul>
             </div>
-            </li>
-            @endguest
-            </ul>
         </div>
-</div>
-</nav>
+    </nav>
 
-<main class="py-4">
-    <div class="container">
-        @include('layouts.flash')
-        @yield('content')
-    </div>
-</main>
+    <main class="py-4">
+        <div class="container">
+            @include('layouts.flash')
+            @yield('content')
+        </div>
+    </main>
 </div>
 
 @yield('scripts')
