@@ -42,9 +42,13 @@ class HomeController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
             'role' => ['required', 'string'],
+            'city' => ['required', 'string'],
+            'nid' => ['required', 'string'],
+            'mobile' => ['required'],
+            'age' => ['required'],
+            'dob' => ['required', 'date'],
+            'gender'=> ['required', 'in:male,female'],
         ]);
-
-        var_dump($request->get('name'));
 
         User::create([
             'name' => $request->get('name'),
@@ -53,7 +57,7 @@ class HomeController extends Controller
             'role' => $request->get('role')
         ]);
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success', 'Successfully registered as voter');
     }
 
     public function candidate_register_portal()
