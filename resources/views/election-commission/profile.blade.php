@@ -82,16 +82,16 @@
                     Election commission
                 </div>
                 <div class="card-body">
-                    @if(!isset(auth()->user()->image))
+                    @if(!isset($commission->image))
                         <img src="{{ asset('img/default.png') }}" alt=""
                              class="bd-placeholder-img card-img-top" style="width:100%">
                     @else
-                        <img src="{{ asset(auth()->user()->image) }}" alt=""
+                        <img src="{{ asset($commission->image) }}" alt=""
                              class="bd-placeholder-img card-img-top" style="width:100%">
                     @endif
-                    <h4>{{ auth()->user()->name }}</h4>
+                    <h4>{{ $commission->name }}</h4>
                     <p class="title">Election commissioner</p>
-                    <p>Email: {{ auth()->user()->email }}</p>
+                    <p>Email: {{ $commission->email }}</p>
                     <p>
                         <button>Contact</button>
                     </p>

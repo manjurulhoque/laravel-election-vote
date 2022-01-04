@@ -10,7 +10,7 @@ class ElectionCommissionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'election-commission']);
+        $this->middleware(['auth', 'election-commission'])->except('profile');
     }
 
     public function voter_list()
@@ -21,7 +21,7 @@ class ElectionCommissionController extends Controller
 
     public function profile()
     {
-        $commission = User::where('role', 'commission')->first();
+        $commission = User::where('role', 'election')->firstOrFail();
         $notices = NoticeBoard::all();
         return view('election-commission.profile', compact('commission', 'notices'));
     }

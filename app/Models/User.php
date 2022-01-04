@@ -23,6 +23,14 @@ class User extends Authenticatable
         'password',
         'role',
         'state', // national or city corporation election
+        'city',
+        'nid',
+        'mobile',
+        'age',
+        'dob',
+        'gender',
+        'religion',
+        'is_married',
     ];
 
     /**
