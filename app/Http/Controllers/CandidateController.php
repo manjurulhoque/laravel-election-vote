@@ -66,10 +66,10 @@ class CandidateController extends Controller
         $party_candidate = PartyCandidate::where('candidate_id', auth()->id())->first();
         if ($party_candidate) {
             if ($party_candidate->status == 'Requested') {
-                return redirect(route('welcome'))->with('warning', 'You already requested to a party');
+                return redirect(route('welcome'))->with('warning', 'You already submitted your nominee to a party');
             }
             if ($party_candidate->status == 'Accepted') {
-                return redirect(route('welcome'))->with('warning', 'You request is already accepted by a party');
+                return redirect(route('welcome'))->with('warning', 'You nominee is already accepted by a party');
             }
         }
 
@@ -81,10 +81,18 @@ class CandidateController extends Controller
     public function request_to_party_submit(Request $request)
     {
         $this->validate($request, [
-            'party_id' => 'required'
+            'candidate_name' => 'required',
+            'mother_name' => 'required',
+            'father_name' => 'required',
+            'mobile' => 'required',
+            'description' => 'required',
+            'village' => 'required',
+            'post_office' => 'required',
+            'upazilla' => 'required',
+            'district' => 'required',
         ]);
 
-        $party_id = $request->get('party_id');
+        $party_id = auth()->user()->party_id;
 
         $party_candidate = PartyCandidate::where('candidate_id', auth()->id())->first();
         if ($party_candidate) {
@@ -96,15 +104,15 @@ class CandidateController extends Controller
             }
         }
 
+        $data = $request->all();
+        $data['party_id'] = $party_id;
+        $data['candidate_id'] = auth()->id();
+        $data['status'] = 'Requested';
+
         $party = User::where('role', 'party')->where('id', $party_id)->firstOrFail();
-        $candidate = auth()->user();
 
-        $new_request = PartyCandidate::create([
-            'party_id' => $party_id,
-            'candidate_id' => auth()->id(),
-            'status' => 'Requested',
-        ]);
+        $new_request = PartyCandidate::create($data);
 
-        return redirect(route('welcome'))->with('success', 'Your request is successfully submitted');
+        return redirect(route('welcome'))->with('success', 'Your nominee is successfully submitted');
     }
 }

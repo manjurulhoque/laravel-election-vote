@@ -68,7 +68,8 @@ class HomeController extends Controller
 
     public function candidate_register_portal()
     {
-        return view('register-portal.candidate');
+        $parties = User::where('role', 'party')->get();
+        return view('register-portal.candidate', compact('parties'));
     }
 
     public function candidate_register_submit(Request $request)
@@ -85,6 +86,7 @@ class HomeController extends Controller
             'is_married' => ['required'],
             'dob' => ['required', 'date'],
             'religion' => ['required'],
+            'party_id' => ['required'],
             'gender' => ['required', 'in:male,female'],
         ]);
 
@@ -100,6 +102,7 @@ class HomeController extends Controller
             'dob' => $request->get('dob'),
             'gender' => $request->get('gender'),
             'religion' => $request->get('religion'),
+            'party_id' => $request->get('party_id'),
             'is_married' => $request->get('is_married') == 'married',
         ]);
 

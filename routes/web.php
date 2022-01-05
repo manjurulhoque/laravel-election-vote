@@ -21,6 +21,7 @@ Route::post('/register-portal', [App\Http\Controllers\HomeController::class, 're
 Route::post('/candidate-register-submit', [App\Http\Controllers\HomeController::class, 'candidate_register_submit'])->name('candidate.register.submit');
 Route::get('/candidate-register-portal', [App\Http\Controllers\HomeController::class, 'candidate_register_portal'])->name('candidate.register.portal');
 Route::get('/party-register-portal', [App\Http\Controllers\HomeController::class, 'party_register_portal'])->name('party.register.portal');
+Route::post('/party-register-submit', [App\Http\Controllers\HomeController::class, 'party_register_submit'])->name('party.register.submit');
 
 Route::resource('posts', App\Http\Controllers\PostController::class);
 Route::resource('comments', App\Http\Controllers\CommentController::class)->only(['store']);
