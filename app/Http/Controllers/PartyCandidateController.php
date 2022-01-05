@@ -42,9 +42,10 @@ class PartyCandidateController extends Controller
 
     public function all_candidates_to_select()
     {
-        $party_candidate_ids = PartyCandidate::where('status', 'Requested')->where('party_id', auth()->id())->pluck('candidate_id')->toArray();
+//        $party_candidate_ids = PartyCandidate::where('status', 'Requested')->where('party_id', auth()->id())->pluck('candidate_id')->toArray();
+        $candidates = PartyCandidate::where('party_id', auth()->id())->get();
 
-        $candidates = User::where("role", "candidate")->whereIn('id', $party_candidate_ids)->get();
+//        $candidates = User::where("role", "candidate")->whereIn('id', $party_candidate_ids)->get();
 
         return view('party.candidate-selection', compact('candidates'));
     }
@@ -75,7 +76,8 @@ class PartyCandidateController extends Controller
         $exists = PartyCandidate::where('party_id', auth()->id())->where('candidate_id', $id)->where('status', 'Accepted')->first();
         if ($exists) return back()->with('warning', 'You already selected this candidate');
 
-        $party_candidate = PartyCandidate::where('status', 'Requested')->where('party_id', auth()->id())->where('candidate_id', $id)->first();
+//        $party_candidate = PartyCandidate::where('status', 'Requested')->where('party_id', auth()->id())->where('candidate_id', $id)->first();
+        $party_candidate = PartyCandidate::where('party_id', auth()->id())->where('candidate_id', $id)->first();
 
         $party_candidate->status = 'Accepted';
         $party_candidate->update();
@@ -92,7 +94,8 @@ class PartyCandidateController extends Controller
         $exists = PartyCandidate::where('party_id', auth()->id())->where('candidate_id', $id)->where('status', 'Accepted')->first();
         if ($exists) return back()->with('warning', 'You already selected this candidate');
 
-        $party_candidate = PartyCandidate::where('status', 'Requested')->where('party_id', auth()->id())->where('candidate_id', $id)->first();
+//        $party_candidate = PartyCandidate::where('status', 'Requested')->where('party_id', auth()->id())->where('candidate_id', $id)->first();
+        $party_candidate = PartyCandidate::where('party_id', auth()->id())->where('candidate_id', $id)->first();
 
         $party_candidate->status = 'Rejected';
         $party_candidate->update();

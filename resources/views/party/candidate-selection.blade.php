@@ -9,23 +9,41 @@
             <tr>
                 <th>Candidate</th>
                 <th>Requested time</th>
+                <th>Father name</th>
+                <th>Mother name</th>
+                <th>Mobile</th>
+                <th>Description</th>
+                <th>Village</th>
+                <th>Post office</th>
+                <th>Upazilla</th>
+                <th>District</th>
                 <th>Profile</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
             @foreach($candidates as $candidate)
                 <tr>
-                    <td>{{ $candidate->name }}</td>
+                    <td>{{ $candidate->candidate_name }}</td>
                     <td>{{ $candidate->created_at }}</td>
+                    <td>{{ $candidate->father_name }}</td>
+                    <td>{{ $candidate->mother_name }}</td>
+                    <td>{{ $candidate->mobile }}</td>
+                    <td>{!! $candidate->description !!}</td>
+                    <td>{{ $candidate->village }}</td>
+                    <td>{{ $candidate->post_office }}</td>
+                    <td>{{ $candidate->upazilla }}</td>
+                    <td>{{ $candidate->district }}</td>
+                    <td>{{ $candidate->status }}</td>
                     <td>
-                        <a href="{{ route('candidate.profile', $candidate->id) }}"
+                        <a href="{{ route('candidates.view', $candidate->candidate->id) }}"
                            class="btn btn-sm btn-outline-primary">View</a>
                     </td>
                     <td>
-                        <a href="{{ route('accept.candidate', $candidate->id) }}"
+                        <a href="{{ route('accept.candidate', $candidate->candidate->id) }}"
                            class="btn btn-sm btn-outline-success" onclick="return confirm('Are your sure?')">Accept</a>
-                        <a href="{{ route('reject.candidate', $candidate->id) }}"
+                        <a href="{{ route('reject.candidate', $candidate->candidate->id) }}"
                            class="btn btn-sm btn-outline-danger" onclick="return confirm('Are your sure?')">Reject</a>
                     </td>
                 </tr>
