@@ -12,8 +12,9 @@
                         <p>{!! $election->description !!}</p>
                     </div>
                     <div class="card-footer text-center">
-                        <a href="{{ route('elections.show', $election->id) }}" class="btn btn-outline-success">View</a>
-                        <a href="{{ route('elections.edit', $election->id) }}" class="btn btn-outline-primary">Edit</a>
+                        <a href="{{ route('vote.count', $election->id) }}" class="btn btn-outline-dark btn-sm">Vote count</a>
+                        <a href="{{ route('elections.show', $election->id) }}" class="btn btn-outline-success btn-sm">View</a>
+                        <a href="{{ route('elections.edit', $election->id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
                     </div>
                 </div>
             </div>

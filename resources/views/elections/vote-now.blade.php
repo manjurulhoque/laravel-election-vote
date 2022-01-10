@@ -13,7 +13,7 @@
                     <div class="row">
                         @forelse($party_candidates as $party_candidate)
                             <div class="col-md-4 col-sm-4">
-                                <div class="card">
+                                <div class="card mt-1">
                                     <h5 class="card-header">{{$party_candidate->candidate->name}}</h5>
                                     <div class="card-body">
                                         @if(!isset($party_candidate->candidate->image))
@@ -33,12 +33,12 @@
                                             @endif
 
                                             <a href="{{ route('candidates.view', $party_candidate->candidate->id) }}"
-                                               class="btn btn-primary">
+                                               class="btn btn-sm btn-primary">
                                                 View candidate
                                             </a>
                                             @if(auth()->check() && auth()->user()->role == 'voter')
                                                 <a href="{{ route('vote.now.store', [$election->id, $party_candidate->candidate->id]) }}"
-                                                   class="btn btn-success" onclick="return confirm('Are you sure?')">
+                                                   class="btn btn-sm btn-success" onclick="return confirm('Are you sure?')">
                                                     Vote me!
                                                 </a>
                                             @else

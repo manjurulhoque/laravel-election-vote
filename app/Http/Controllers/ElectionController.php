@@ -90,13 +90,31 @@ class ElectionController extends Controller
 
     public function vote_now($id)
     {
+//        $cc = [196, 211, 4, 201];
+//        $voters = User::where('role', 'voter')->get();
+//        foreach ($cc as $c) {
+//            foreach ($voters as $voter) {
+//                if (!ElectionResult::where([
+//                    'election_id' => 1,
+//                    'user_id' => $voter->id,
+//                    'candidate_id' => $c,
+//                ])->exists()) {
+//                    $vote = ElectionResult::create([
+//                        'election_id' => 1,
+//                        'user_id' => $voter->id,
+//                        'candidate_id' => $c,
+//                    ]);
+//                }
+//            }
+//        }
+
         $election = Election::findOrFail($id);
 
         if (!$election->is_active) {
             return back()->with('warning', 'This is not a running election');
         }
 
-        $party_candidates = PartyCandidate::all();
+        $party_candidates = PartyCandidate::where('status', 'Accepted')->get();
 
         return view('elections.vote-now', compact('election', 'party_candidates'));
     }
@@ -150,5 +168,18 @@ class ElectionController extends Controller
         $elections = Election::where('type', $type)->get();
 
         return view('elections.election-type', compact('elections', 'type'));
+    }
+
+    public function vote_count($id)
+    {
+        $election = Election::findOrFail($id);
+
+        if (!$election->is_active) {
+            return back()->with('warning', 'This is not a running election');
+        }
+
+        $vote_counts = $election->vote_counts()->paginate(10);
+
+        return view('elections.votes', compact('election', 'vote_counts'));
     }
 }

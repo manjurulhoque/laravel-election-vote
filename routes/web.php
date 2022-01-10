@@ -53,6 +53,7 @@ Route::get('upload-profile-image', [\App\Http\Controllers\HomeController::class,
 Route::put('upload-profile-image', [\App\Http\Controllers\HomeController::class, 'save_profile_image'])->name('store.profile.image');
 Route::get('party-profile/{id}', [\App\Http\Controllers\PartyController::class, 'party_profile'])->name('party.profile');
 Route::get('vote-now/{id}', [\App\Http\Controllers\ElectionController::class, 'vote_now'])->name('vote.now');
+Route::get('vote-count/{id}', [\App\Http\Controllers\ElectionController::class, 'vote_count'])->name('vote.count');
 Route::get('vote-now-count/{election_id}/{candidate_id}', [\App\Http\Controllers\ElectionController::class, 'vote_now_store'])->name('vote.now.store');
 Route::get('request-to-party', [\App\Http\Controllers\CandidateController::class, 'request_to_party'])->name('request.to.party');
 Route::post('submit-request-to-party', [\App\Http\Controllers\CandidateController::class, 'request_to_party_submit'])->name('request.to.party.submit');

@@ -10,4 +10,14 @@ class ElectionResult extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'candidate_id', 'election_id'];
+
+    public function voter()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function candidate()
+    {
+        return $this->belongsTo(User::class, 'candidate_id');
+    }
 }
