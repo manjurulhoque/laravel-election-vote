@@ -68,15 +68,30 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description">Notice description</label>
+                            <label for="description">Description</label>
                             <textarea class="form-control {{ $errors->has('description') ? ' is-invalid' : '' }}"
                                       name="description"
                                       id="description" rows="10">{{ $election->description }}</textarea>
 
                             @if($errors->has('description'))
                                 <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('description') }}</strong>
-                                    </span>
+                                    <strong>{{ $errors->first('description') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <select name="type" id="type" class="form-control" required>
+                                <option value="" selected>Select election type</option>
+                                <option value="National" @if($election->type == 'National') selected @endif>National</option>
+                                <option value="City" @if($election->type == 'City') selected @endif>City</option>
+                            </select>
+
+                            @if($errors->has('type'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('type') }}</strong>
+                                </span>
                             @endif
                         </div>
 

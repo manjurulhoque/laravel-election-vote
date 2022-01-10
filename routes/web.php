@@ -58,3 +58,4 @@ Route::get('request-to-party', [\App\Http\Controllers\CandidateController::class
 Route::post('submit-request-to-party', [\App\Http\Controllers\CandidateController::class, 'request_to_party_submit'])->name('request.to.party.submit');
 Route::get('request-status', [\App\Http\Controllers\CandidateController::class, 'request_status'])->name('request.status');
 Route::get('election-commission', [\App\Http\Controllers\ElectionCommissionController::class, 'profile'])->name('election.commission.profile');
+Route::get('elections-by-type/{type}', [\App\Http\Controllers\ElectionController::class, 'election_type'])->name('elections.by.type');

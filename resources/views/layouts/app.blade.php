@@ -44,6 +44,17 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            Elections
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('elections.by.type', 'National') }}">National</a>
+                            <a class="dropdown-item" href="{{ route('elections.by.type', 'City') }}">City</a>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('notices.index') }}">Notice board</a>
                     </li>

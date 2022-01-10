@@ -27,6 +27,7 @@ class ElectionController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
+            'type' => 'required',
             'description' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
@@ -61,6 +62,7 @@ class ElectionController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
+            'type' => 'required',
             'description' => 'required',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
@@ -134,5 +136,12 @@ class ElectionController extends Controller
         } else {
             return back()->with('warning', "Election isn't started yet");
         }
+    }
+
+    public function election_type($type)
+    {
+        $elections = Election::where('type', $type)->get();
+
+        return view('elections.election-type', compact('elections', 'type'));
     }
 }
