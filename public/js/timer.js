@@ -15,11 +15,20 @@ function updateTimer() {
     let s = secs - mins * 60;
 
 
-    timer.innerHTML =
-        '<div>' + d + '<span>Days</span></div>' +
-        '<div>' + h + '<span>Hours</span></div>' +
-        '<div>' + m + '<span>Minutes</span></div>' +
-        '<div>' + s + '<span>Seconds</span></div>';
+    if (diff < 0) {
+        clearInterval(updateTimer);
+        timer.innerHTML =
+            '<div>00<span>Days</span></div>' +
+            '<div>00<span>Hours</span></div>' +
+            '<div>00<span>Minutes</span></div>' +
+            '<div>00<span>Seconds</span></div>';
+    } else {
+        timer.innerHTML =
+            '<div>' + d + '<span>Days</span></div>' +
+            '<div>' + h + '<span>Hours</span></div>' +
+            '<div>' + m + '<span>Minutes</span></div>' +
+            '<div>' + s + '<span>Seconds</span></div>';
+    }
 }
 
 setInterval('updateTimer()', 1000);

@@ -126,6 +126,13 @@ class ElectionController extends Controller
 
             if ($vote_exists) return back()->with('warning', 'You already voted this candidate');
 
+            if (ElectionResult::where([
+                'election_id' => $election->id,
+                'user_id' => auth()->id(),
+            ])->exists()) {
+                return back()->with('warning', 'Your vote is already counted');
+            }
+
             $vote = ElectionResult::create([
                 'election_id' => $election->id,
                 'user_id' => auth()->id(),
@@ -134,7 +141,7 @@ class ElectionController extends Controller
 
             return back()->with('success', 'Your vote successfully counted');
         } else {
-            return back()->with('warning', "Election isn't started yet");
+            return back()->with('warning', "Election isn't started yet or finished");
         }
     }
 

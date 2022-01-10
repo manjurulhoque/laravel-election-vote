@@ -32,9 +32,12 @@
             }
         });
 
+        let end = new Date($('#start_date').val());
+        end.setDate(end.getDate() + 1);
+
         $('#end_date').datepicker({
             format: 'yyyy-mm-dd',
-            startDate: date,
+            startDate: end,
             autoclose: true
         });
     </script>
