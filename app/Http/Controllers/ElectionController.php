@@ -94,18 +94,35 @@ class ElectionController extends Controller
 //        $voters = User::where('role', 'voter')->get();
 //        foreach ($cc as $c) {
 //            foreach ($voters as $voter) {
+////                $c = array_rand($cc, 1);
 //                if (!ElectionResult::where([
-//                    'election_id' => 1,
-//                    'user_id' => $voter->id,
-//                    'candidate_id' => $c,
-//                ])->exists()) {
-//                    $vote = ElectionResult::create([
 //                        'election_id' => 1,
 //                        'user_id' => $voter->id,
 //                        'candidate_id' => $c,
-//                    ]);
+//                    ])->exists() && !ElectionResult::where([
+//                        'election_id' => 1,
+//                        'user_id' => $voter->id,
+//                    ])->exists()) {
+//                    try {
+//                        $vote = ElectionResult::create([
+//                            'election_id' => 1,
+//                            'user_id' => $voter->id,
+//                            'candidate_id' => $c,
+//                        ]);
+//                    } catch (\Exception $exception) {
+//
+//                    }
 //                }
 //            }
+//        }
+
+//        $votes = ElectionResult::all();
+//
+//        foreach ($votes as $vote) {
+//
+//            $vote->party_id = $vote->candidate->party_id;
+//
+//            $vote->update();
 //        }
 
         $election = Election::findOrFail($id);
@@ -155,6 +172,7 @@ class ElectionController extends Controller
                 'election_id' => $election->id,
                 'user_id' => auth()->id(),
                 'candidate_id' => $candidate->id,
+                'party_id' => $candidate->party_id,
             ]);
 
             return back()->with('success', 'Your vote successfully counted');
@@ -170,16 +188,46 @@ class ElectionController extends Controller
         return view('elections.election-type', compact('elections', 'type'));
     }
 
-    public function vote_count($id)
+    public function vote_count_list($id)
     {
-        $election = Election::findOrFail($id);
+        $election = Election::with('vote_counts.candidate')->findOrFail($id);
 
         if (!$election->is_active) {
             return back()->with('warning', 'This is not a running election');
         }
 
-        $vote_counts = $election->vote_counts()->paginate(10);
+        $vote_counts = $election->vote_counts;
+        $winners = $election->vote_counts()->groupBy('party_id')->selectRaw('count(*) as total, party_id')->get();
 
-        return view('elections.votes', compact('election', 'vote_counts'));
+//        foreach ($winners as $winner) {
+//            echo $winner;
+//        }
+
+        return view('elections.votes', compact('election', 'vote_counts', 'winners'));
+    }
+
+    public function publish_result($id)
+    {
+        $election = Election::with('vote_counts.candidate')->findOrFail($id);
+
+        if (!$election->is_active) {
+            return back()->with('warning', 'This is not a running election');
+        }
+
+        if ($election->is_published) {
+            return back()->with('warning', 'Election is already published');
+        }
+
+        $winners = $election->vote_counts()->groupBy('party_id')->selectRaw('count(*) as total, party_id')->get();
+
+        $winners = $winners->sortBy('total');
+
+        $winner = $winners->last();
+        $election->is_published = true;
+        $election->winner_id = $winner->party_id;
+
+        $election->update();
+
+        return back()->with('success', 'Election is published');
     }
 }

@@ -70,6 +70,7 @@ class User extends Authenticatable
 
     public function get_party($party_id)
     {
-        return User::where('role', 'party')->where('id', $party_id)->first();
+        return $party_id;
+//        return User::where('role', 'party')->where('id', $party_id)->first();
     }
 }
