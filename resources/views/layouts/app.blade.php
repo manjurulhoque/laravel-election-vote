@@ -22,9 +22,71 @@
     <link href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/litera/bootstrap.min.css" rel="stylesheet">
 
     @yield('styles')
+    <style>
+        .jumbotron {
+            background-image: url("{{ asset('img/bg.png') }}");
+            background-position: top;
+            height: 300px;
+            margin-bottom: 0;
+        }
+
+        .cards .card-img-top {
+            height: 170px;
+        }
+    </style>
 </head>
 <body>
 <div id="app">
+    @if(Route::currentRouteName() == 'welcome')
+        <div class="jumbotron">
+            <h1 class="text-white text-center">Online election management system</h1>
+        </div>
+        <section class="mt-5 mb-3 cards">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/1.jpg') }}" alt="Card image cap">
+                            <div class="card-body">
+                                <p>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                    Ipsum
+                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                    printer took a galley of type and scrambled it to make a type specimen book.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/2.jpg') }}" alt="Card image cap">
+                            <div class="card-body">
+                                <p>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                    Ipsum
+                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                    printer took a galley of type and scrambled it to make a type specimen book.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/3.jpeg') }}" alt="Card image cap">
+                            <div class="card-body">
+                                <p>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                    Ipsum
+                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                    printer took a galley of type and scrambled it to make a type specimen book.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -56,7 +118,10 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('notices.index') }}">Notice board</a>
+                        <a class="nav-link text-white" href="{{ route('notices.index') }}">Notices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ route('published.elections') }}">Elections</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('candidates.list') }}">Candidates</a>
@@ -66,7 +131,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('election.commission.profile') }}">Election
-                            commission profile</a>
+                            Commission</a>
                     </li>
                     <!-- Authentication Links -->
                     @guest

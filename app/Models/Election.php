@@ -20,4 +20,18 @@ class Election extends Model
     {
         return $this->belongsTo(User::class, 'winner_id');
     }
+
+    public function winners()
+    {
+        return $this->vote_counts()->groupBy('party_id')->selectRaw('count(*) as total, party_id')->get();
+    }
+
+    public function winner_party($winners)
+    {
+        $winners = $winners->sortBy('total');
+
+        $winner = $winners->last();
+
+        return $winner;
+    }
 }

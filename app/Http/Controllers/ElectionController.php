@@ -90,22 +90,22 @@ class ElectionController extends Controller
 
     public function vote_now($id)
     {
-//        $cc = [196, 211, 4, 201];
+//        $cc = [211, 211, 4, 201];
 //        $voters = User::where('role', 'voter')->get();
 //        foreach ($cc as $c) {
 //            foreach ($voters as $voter) {
 ////                $c = array_rand($cc, 1);
 //                if (!ElectionResult::where([
-//                        'election_id' => 1,
+//                        'election_id' => 3,
 //                        'user_id' => $voter->id,
 //                        'candidate_id' => $c,
 //                    ])->exists() && !ElectionResult::where([
-//                        'election_id' => 1,
+//                        'election_id' => 3,
 //                        'user_id' => $voter->id,
 //                    ])->exists()) {
 //                    try {
 //                        $vote = ElectionResult::create([
-//                            'election_id' => 1,
+//                            'election_id' => 3,
 //                            'user_id' => $voter->id,
 //                            'candidate_id' => $c,
 //                        ]);
@@ -116,14 +116,14 @@ class ElectionController extends Controller
 //            }
 //        }
 
-//        $votes = ElectionResult::all();
-//
-//        foreach ($votes as $vote) {
-//
-//            $vote->party_id = $vote->candidate->party_id;
-//
-//            $vote->update();
-//        }
+        $votes = ElectionResult::where('election_id', 3)->get();
+
+        foreach ($votes as $vote) {
+
+            $vote->party_id = $vote->candidate->party_id;
+
+            $vote->update();
+        }
 
         $election = Election::findOrFail($id);
 
@@ -223,11 +223,19 @@ class ElectionController extends Controller
         $winners = $winners->sortBy('total');
 
         $winner = $winners->last();
+        $election->is_active = false;
         $election->is_published = true;
         $election->winner_id = $winner->party_id;
 
         $election->update();
 
-        return back()->with('success', 'Election is published');
+        return redirect(route('elections.index'))->with('success', 'Election is published');
+    }
+
+    public function published_elections()
+    {
+        $elections = Election::where('is_published', true)->get();
+
+        return view('elections.published-elections', compact('elections'));
     }
 }

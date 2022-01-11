@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Election;
+use App\Models\NoticeBoard;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,8 +17,10 @@ class HomeController extends Controller
 
     public function welcome()
     {
-        $election = Election::where('is_active', true)->first();
-        return view('welcome', compact('election'));
+        $commission = User::where('role', 'election')->firstOrFail();
+        $election = Election::where('is_active', true)->where('is_published', false)->first();
+        $notices = NoticeBoard::all();
+        return view('welcome', compact('election', 'commission', 'notices'));
     }
 
     public function index()

@@ -61,3 +61,4 @@ Route::get('request-status', [\App\Http\Controllers\CandidateController::class, 
 Route::get('election-commission', [\App\Http\Controllers\ElectionCommissionController::class, 'profile'])->name('election.commission.profile');
 Route::get('elections-by-type/{type}', [\App\Http\Controllers\ElectionController::class, 'election_type'])->name('elections.by.type');
 Route::get('publish-result/{id}', [\App\Http\Controllers\ElectionController::class, 'publish_result'])->name('publish.result')->middleware(['auth', 'election-commission']);
+Route::get('published-elections', [\App\Http\Controllers\ElectionController::class, 'published_elections'])->name('published.elections')->middleware(['auth']);
