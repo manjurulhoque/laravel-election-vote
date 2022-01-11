@@ -71,9 +71,6 @@
                         <a class="nav-link text-white" href="{{ route('notices.index') }}">Notices</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('published.elections') }}">Elections</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link text-white" href="{{ route('parties.list') }}">Parties</a>
                     </li>
                     <li class="nav-item">
@@ -98,6 +95,9 @@
                         {{--                                </li>--}}
                         {{--                            @endif--}}
                     @else
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('published.elections') }}">Elections</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('candidates.list') }}">Candidates</a>
                         </li>
