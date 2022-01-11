@@ -74,13 +74,17 @@ class ElectionController extends Controller
                 return back()->with('warning', "Can't have multiple active election at same time");
             }
             $data['is_active'] = true;
+
+            if ($election->is_published) {
+                return back()->with('warning', "Election is already published");
+            }
         } else {
             $data['is_active'] = false;
         }
 
         $election = $election->update($data);
 
-        return redirect(route('elections.index'));
+        return redirect(route('elections.index'))->with('success', "Election is updated");
     }
 
     public function destroy(Election $election)

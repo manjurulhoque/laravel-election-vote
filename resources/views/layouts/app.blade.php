@@ -37,56 +37,6 @@
 </head>
 <body>
 <div id="app">
-    @if(Route::currentRouteName() == 'welcome')
-        <div class="jumbotron">
-            <h1 class="text-white text-center">Online election management system</h1>
-        </div>
-        <section class="mt-5 mb-3 cards">
-            <div class="row">
-                <div class="container">
-                    <div class="col-md-4">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ asset('img/1.jpg') }}" alt="Card image cap">
-                            <div class="card-body">
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum
-                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                    printer took a galley of type and scrambled it to make a type specimen book.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ asset('img/2.jpg') }}" alt="Card image cap">
-                            <div class="card-body">
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum
-                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                    printer took a galley of type and scrambled it to make a type specimen book.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card" style="width: 18rem;">
-                            <img class="card-img-top" src="{{ asset('img/3.jpeg') }}" alt="Card image cap">
-                            <div class="card-body">
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum
-                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                    printer took a galley of type and scrambled it to make a type specimen book.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    @endif
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -142,7 +92,7 @@
                         @endif
 
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('register.portal') }}">Register portal</a>
+                            <a class="nav-link text-white" href="{{ route('register.portal') }}">Register</a>
                         </li>
 
                         {{--                            @if (Route::has('register'))--}}

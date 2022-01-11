@@ -62,161 +62,213 @@
         </div>
     @endif
 
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header bg-secondary text-white">
-                    Notice board
-                </div>
-                <div class="card-body">
-                    @forelse($notices as $notice)
-                        <div class="card mb-3">
-                            <div class="card-header text-white bg-primary">
-                                <h3>{{ $notice->title }}</h3>
-                                @if(auth()->check() && auth()->user()->role == 'election')
-                                    <form action="{{ route('notices.destroy', $notice->id)}}" method="POST"
-                                          id="delete-form">
-                                        @csrf
-                                        @method("DELETE")
-                                    </form>
-                                    <a href="{{ route('notices.show', $notice->id) }}" class="btn btn-sm btn-dark">Show</a>
-                                    <a href="{{ route('notices.edit', $notice->id) }}" class="btn btn-sm btn-success">Edit</a>
-                                    <a href="{{ route('notices.destroy', $notice->id) }}"
-                                       class="btn btn-sm btn-danger" onclick="event.preventDefault();
-                                                     document.getElementById('delete-form').submit();">Delete</a>
-                                @endif
-                            </div>
+    @if(auth()->guest() || (auth()->check() && auth()->user()->role != 'election'))
+        <div class="jumbotron">
+            <h1 class="text-white text-center">Online election management system</h1>
+        </div>
+        <section class="mt-5 mb-3 cards">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/1.jpg') }}" alt="Card image cap">
                             <div class="card-body">
-                                <p>{!! $notice->description !!}</p>
+                                <p>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                    Ipsum
+                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                    printer took a galley of type and scrambled it to make a type specimen book.
+                                </p>
                             </div>
                         </div>
-                    @empty
-                        <h2>No notice found!</h2>
-                    @endforelse
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/2.jpg') }}" alt="Card image cap">
+                            <div class="card-body">
+                                <p>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                    Ipsum
+                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                    printer took a galley of type and scrambled it to make a type specimen book.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="{{ asset('img/3.jpeg') }}" alt="Card image cap">
+                            <div class="card-body">
+                                <p>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+                                    Ipsum
+                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                    printer took a galley of type and scrambled it to make a type specimen book.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @else
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-secondary text-white">
+                        Notice board
+                    </div>
+                    <div class="card-body">
+                        @forelse($notices as $notice)
+                            <div class="card mb-3">
+                                <div class="card-header text-white bg-primary">
+                                    <h3>{{ $notice->title }}</h3>
+                                    @if(auth()->check() && auth()->user()->role == 'election')
+                                        <form action="{{ route('notices.destroy', $notice->id)}}" method="POST"
+                                              id="delete-form">
+                                            @csrf
+                                            @method("DELETE")
+                                        </form>
+                                        <a href="{{ route('notices.show', $notice->id) }}" class="btn btn-sm btn-dark">Show</a>
+                                        <a href="{{ route('notices.edit', $notice->id) }}"
+                                           class="btn btn-sm btn-success">Edit</a>
+                                        <a href="{{ route('notices.destroy', $notice->id) }}"
+                                           class="btn btn-sm btn-danger" onclick="event.preventDefault();
+                                                     document.getElementById('delete-form').submit();">Delete</a>
+                                    @endif
+                                </div>
+                                <div class="card-body">
+                                    <p>{!! $notice->description !!}</p>
+                                </div>
+                            </div>
+                        @empty
+                            <h2>No notice found!</h2>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card commission">
+                    <div class="card-header bg-primary text-white">
+                        Election commission
+                    </div>
+                    <div class="card-body">
+                        @if(!isset($commission->image))
+                            <img src="{{ asset('img/default.png') }}" alt=""
+                                 class="bd-placeholder-img card-img-top" style="width:100%">
+                        @else
+                            <img src="{{ asset($commission->image) }}" alt=""
+                                 class="bd-placeholder-img card-img-top" style="width:100%">
+                        @endif
+                        <h4>{{ $commission->name }}</h4>
+                        <p class="title">Election commissioner</p>
+                        <p>Email: {{ $commission->email }}</p>
+                        <p>
+                            <button>Contact</button>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card commission">
-                <div class="card-header bg-primary text-white">
-                    Election commission
-                </div>
-                <div class="card-body">
-                    @if(!isset($commission->image))
-                        <img src="{{ asset('img/default.png') }}" alt=""
-                             class="bd-placeholder-img card-img-top" style="width:100%">
-                    @else
-                        <img src="{{ asset($commission->image) }}" alt=""
-                             class="bd-placeholder-img card-img-top" style="width:100%">
-                    @endif
-                    <h4>{{ $commission->name }}</h4>
-                    <p class="title">Election commissioner</p>
-                    <p>Email: {{ $commission->email }}</p>
-                    <p>
-                        <button>Contact</button>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
+    @endif
 
-{{--    <div class="feature_area">--}}
-{{--        <div class="container">--}}
-{{--            <div class="row">--}}
-{{--                <div class="col-md-12">--}}
-{{--                    <div class="section-title t_center">--}}
-{{--                        <!-- title -->--}}
-{{--                        <h2>what we do</h2>--}}
-{{--                        <!-- IMAGE -->--}}
-{{--                        <div class="em-image">--}}
-{{--                            <img src="{{ asset('img/icon.png') }}" alt="title image"/>--}}
-{{--                        </div>--}}
-{{--                        <!-- TEXT -->--}}
-{{--                        <p class=" text-alignm">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam </p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="row">--}}
-{{--                    <div class="col-md-4 col-sm-6 col-xm-6">--}}
-{{--                        <div class="em-feature">--}}
-{{--                            <div class="feature_inner_box">--}}
-{{--                                <div class="feature_inner">--}}
-{{--                                    <div class="em_feature-icon">--}}
-{{--                                        <span><i class="fa fa-location-arrow"></i></span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="em-feature-title">--}}
-{{--                                        <h2>Our Campaign</h2>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="em_content_text">--}}
-{{--                                    <div class="em-feature-desc">--}}
-{{--                                        <p>Lorem ipsum dolor sit amet, cata adipisicing elit, sed do eiusmod temapor--}}
-{{--                                            incididunt utn labore et dolore magna</p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="f-readmore">--}}
-{{--                                    <div class="feature_button">--}}
-{{--                                        <a href="#">Read More<span><i class="fa fa-long-arrow-right"></i></span>--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-md-4 col-sm-6 col-xm-6">--}}
-{{--                        <div class="em-feature">--}}
-{{--                            <div class="feature_inner_box">--}}
-{{--                                <div class="feature_inner">--}}
-{{--                                    <div class="em_feature-icon">--}}
-{{--                                        <span><i class="fa fa-volume-up"></i></span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="em-feature-title">--}}
-{{--                                        <h2>Become A Member</h2>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="em_content_text">--}}
-{{--                                    <div class="em-feature-desc">--}}
-{{--                                        <p>Lorem ipsum dolor sit amet, cata adipisicing elit, sed do eiusmod temapor--}}
-{{--                                            incididunt utn labore et dolore magna</p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="f-readmore">--}}
-{{--                                    <div class="feature_button">--}}
-{{--                                        <a href="#">Read More<span><i class="fa fa-long-arrow-right"></i></span>--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="col-md-4 col-sm-6 col-xm-6">--}}
-{{--                        <div class="em-feature">--}}
-{{--                            <div class="feature_inner_box">--}}
-{{--                                <div class="feature_inner">--}}
-{{--                                    <div class="em_feature-icon">--}}
-{{--                                        <span><i class="fa fa-mobile-phone"></i></span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="em-feature-title">--}}
-{{--                                        <h2>Energy Policy</h2>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="em_content_text">--}}
-{{--                                    <div class="em-feature-desc">--}}
-{{--                                        <p>Lorem ipsum dolor sit amet, cata adipisicing elit, sed do eiusmod temapor--}}
-{{--                                            incididunt utn labore et dolore magna</p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="f-readmore">--}}
-{{--                                    <div class="feature_button">--}}
-{{--                                        <a href="#">Read More<span><i class="fa fa-long-arrow-right"></i></span>--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div class="feature_area">--}}
+    {{--        <div class="container">--}}
+    {{--            <div class="row">--}}
+    {{--                <div class="col-md-12">--}}
+    {{--                    <div class="section-title t_center">--}}
+    {{--                        <!-- title -->--}}
+    {{--                        <h2>what we do</h2>--}}
+    {{--                        <!-- IMAGE -->--}}
+    {{--                        <div class="em-image">--}}
+    {{--                            <img src="{{ asset('img/icon.png') }}" alt="title image"/>--}}
+    {{--                        </div>--}}
+    {{--                        <!-- TEXT -->--}}
+    {{--                        <p class=" text-alignm">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam </p>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--                <div class="row">--}}
+    {{--                    <div class="col-md-4 col-sm-6 col-xm-6">--}}
+    {{--                        <div class="em-feature">--}}
+    {{--                            <div class="feature_inner_box">--}}
+    {{--                                <div class="feature_inner">--}}
+    {{--                                    <div class="em_feature-icon">--}}
+    {{--                                        <span><i class="fa fa-location-arrow"></i></span>--}}
+    {{--                                    </div>--}}
+    {{--                                    <div class="em-feature-title">--}}
+    {{--                                        <h2>Our Campaign</h2>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="em_content_text">--}}
+    {{--                                    <div class="em-feature-desc">--}}
+    {{--                                        <p>Lorem ipsum dolor sit amet, cata adipisicing elit, sed do eiusmod temapor--}}
+    {{--                                            incididunt utn labore et dolore magna</p>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="f-readmore">--}}
+    {{--                                    <div class="feature_button">--}}
+    {{--                                        <a href="#">Read More<span><i class="fa fa-long-arrow-right"></i></span>--}}
+    {{--                                        </a>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                    <div class="col-md-4 col-sm-6 col-xm-6">--}}
+    {{--                        <div class="em-feature">--}}
+    {{--                            <div class="feature_inner_box">--}}
+    {{--                                <div class="feature_inner">--}}
+    {{--                                    <div class="em_feature-icon">--}}
+    {{--                                        <span><i class="fa fa-volume-up"></i></span>--}}
+    {{--                                    </div>--}}
+    {{--                                    <div class="em-feature-title">--}}
+    {{--                                        <h2>Become A Member</h2>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="em_content_text">--}}
+    {{--                                    <div class="em-feature-desc">--}}
+    {{--                                        <p>Lorem ipsum dolor sit amet, cata adipisicing elit, sed do eiusmod temapor--}}
+    {{--                                            incididunt utn labore et dolore magna</p>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="f-readmore">--}}
+    {{--                                    <div class="feature_button">--}}
+    {{--                                        <a href="#">Read More<span><i class="fa fa-long-arrow-right"></i></span>--}}
+    {{--                                        </a>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                    <div class="col-md-4 col-sm-6 col-xm-6">--}}
+    {{--                        <div class="em-feature">--}}
+    {{--                            <div class="feature_inner_box">--}}
+    {{--                                <div class="feature_inner">--}}
+    {{--                                    <div class="em_feature-icon">--}}
+    {{--                                        <span><i class="fa fa-mobile-phone"></i></span>--}}
+    {{--                                    </div>--}}
+    {{--                                    <div class="em-feature-title">--}}
+    {{--                                        <h2>Energy Policy</h2>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="em_content_text">--}}
+    {{--                                    <div class="em-feature-desc">--}}
+    {{--                                        <p>Lorem ipsum dolor sit amet, cata adipisicing elit, sed do eiusmod temapor--}}
+    {{--                                            incididunt utn labore et dolore magna</p>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                                <div class="f-readmore">--}}
+    {{--                                    <div class="feature_button">--}}
+    {{--                                        <a href="#">Read More<span><i class="fa fa-long-arrow-right"></i></span>--}}
+    {{--                                        </a>--}}
+    {{--                                    </div>--}}
+    {{--                                </div>--}}
+    {{--                            </div>--}}
+    {{--                        </div>--}}
+    {{--                    </div>--}}
+    {{--                </div>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
 
 @endsection

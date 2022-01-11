@@ -53,7 +53,7 @@
                         <div class="card mb-3">
                             <div class="card-header text-white bg-primary">
                                 <h3>{{ $notice->title }}</h3>
-                                @if(auth()->user()->role == 'election')
+                                @if(auth()->check() && auth()->user()->role == 'election')
                                     <form action="{{ route('notices.destroy', $notice->id)}}" method="POST"
                                           id="delete-form">
                                         @csrf
