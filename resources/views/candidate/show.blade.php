@@ -8,6 +8,11 @@
         </div>
         <div class="card-body">
             <h3>Name: {{ $candidate->name }}</h3>
+            @if($party)
+                <p>Party: <b>{{ $party->party->name }}</b></p>
+            @else
+                <p>Party: <b>No party selected this candidate yet!</b></p>
+            @endif
             @if(!isset($candidate->image))
                 <img src="{{ asset('img/default.png') }}" alt="" class="img-thumbnail">
             @else

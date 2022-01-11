@@ -11,7 +11,7 @@ class PartyCandidateController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $party_candidates = $user->party_candidates;
+        $party_candidates = $user->party_candidates->where('status', 'Accepted');
         return view('party.selected-candidates', compact('party_candidates'));
     }
 
@@ -42,9 +42,10 @@ class PartyCandidateController extends Controller
 
     public function all_candidates_to_select()
     {
-        $party_candidate_ids = PartyCandidate::all()->pluck('candidate_id')->toArray();
+//        $party_candidate_ids = PartyCandidate::where('status', 'Requested')->where('party_id', auth()->id())->pluck('candidate_id')->toArray();
+        $candidates = PartyCandidate::where('party_id', auth()->id())->get();
 
-        $candidates = User::where("role", "candidate")->whereNotIn('id', $party_candidate_ids)->get();
+//        $candidates = User::where("role", "candidate")->whereIn('id', $party_candidate_ids)->get();
 
         return view('party.candidate-selection', compact('candidates'));
     }
@@ -64,5 +65,41 @@ class PartyCandidateController extends Controller
         $new_party_candidate->save();
 
         return back()->with('success', 'Candidate successfully selected');
+    }
+
+    public function accept_candidate($id)
+    {
+        $candidate = User::where('id', $id)->where('role', 'candidate')->first();
+        if (!$candidate) {
+            return back()->with('error', 'No candidate found with this id');
+        }
+        $exists = PartyCandidate::where('party_id', auth()->id())->where('candidate_id', $id)->where('status', 'Accepted')->first();
+        if ($exists) return back()->with('warning', 'You already selected this candidate');
+
+//        $party_candidate = PartyCandidate::where('status', 'Requested')->where('party_id', auth()->id())->where('candidate_id', $id)->first();
+        $party_candidate = PartyCandidate::where('party_id', auth()->id())->where('candidate_id', $id)->first();
+
+        $party_candidate->status = 'Accepted';
+        $party_candidate->update();
+
+        return back()->with('success', 'Candidate successfully selected');
+    }
+
+    public function reject_candidate($id)
+    {
+        $candidate = User::where('id', $id)->where('role', 'candidate')->first();
+        if (!$candidate) {
+            return back()->with('error', 'No candidate found with this id');
+        }
+        $exists = PartyCandidate::where('party_id', auth()->id())->where('candidate_id', $id)->where('status', 'Accepted')->first();
+        if ($exists) return back()->with('warning', 'You already selected this candidate');
+
+//        $party_candidate = PartyCandidate::where('status', 'Requested')->where('party_id', auth()->id())->where('candidate_id', $id)->first();
+        $party_candidate = PartyCandidate::where('party_id', auth()->id())->where('candidate_id', $id)->first();
+
+        $party_candidate->status = 'Rejected';
+        $party_candidate->update();
+
+        return back()->with('success', 'Candidate successfully rejected');
     }
 }

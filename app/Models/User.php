@@ -22,6 +22,16 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'state', // national or city corporation election
+        'city',
+        'nid',
+        'mobile',
+        'age',
+        'dob',
+        'gender',
+        'religion',
+        'is_married',
+        'party_id',
     ];
 
     /**
@@ -51,5 +61,16 @@ class User extends Authenticatable
     public function party_candidates()
     {
         return $this->hasMany(PartyCandidate::class, 'party_id', 'id');
+    }
+
+    public function party()
+    {
+        return $this->belongsTo(User::class, 'party_id', 'id');
+    }
+
+    public function get_party($party_id)
+    {
+        return $party_id;
+//        return User::where('role', 'party')->where('id', $party_id)->first();
     }
 }
