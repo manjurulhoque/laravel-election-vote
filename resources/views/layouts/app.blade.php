@@ -178,12 +178,19 @@
         </div>
     </nav>
 
-    <main class="py-4">
-        <div class="container">
+    @if(\Route::currentRouteName() == 'welcome')
+        <div class="container-fluid p-0">
             @include('layouts.flash')
             @yield('content')
         </div>
-    </main>
+    @else
+        <main class="py-4">
+            <div class="container">
+                @include('layouts.flash')
+                @yield('content')
+            </div>
+        </main>
+    @endif
 </div>
 
 @yield('scripts')

@@ -7,7 +7,6 @@
     <style>
         .card.commission {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            max-width: 300px;
             margin: auto;
             text-align: center;
         }
@@ -37,6 +36,15 @@
 
         button:hover, a:hover {
             opacity: 0.7;
+        }
+
+        .banner {
+            background-image: url("{{ asset('img/banner.jpeg') }}") !important;
+            background-position: bottom;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 700px !important;
+            margin-bottom: 0;
         }
     </style>
 @endsection
@@ -112,11 +120,16 @@
             </div>
         </section>
     @else
-        <div class="row">
-            <div class="col-md-8">
+        <div class="jumbotron banner">
+            <h1 class="text-white text-center">Online election management system</h1>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-2">
                 <div class="card">
-                    <div class="card-header bg-secondary text-white">
+                    <div class="card-header bg-dark text-white">
                         Notice board
+                        <a href="{{ route('notices.index') }}" class="text-white float-right">See all</a>
                     </div>
                     <div class="card-body">
                         @forelse($notices as $notice)
@@ -147,9 +160,77 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        Election commission
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    <i class="fa fa-chevron-right"></i>
+                                    ১৬ জানুয়ারী ২০২২ তারিখে অনুষ্ঠিতব্য নির্বাচন উপলক্ষে আইনশৃঙ্খলা সমন্বয় ও মনিটরিং সেল
+                                    গঠন ।
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    <i class="fa fa-chevron-right"></i>
+                                    জাতীয় সংসদের ১৩৬ টাঙ্গাইল-৭ আসনের নির্বাচনে ইলেক্ট্রনিক ভোটিং মেশিন (ইভিএম) এর
+                                    মাধ্যমে ভোটগ্রহণ সংক্রান্ত পরিপত্র
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    <i class="fa fa-chevron-right"></i>
+                                    নারায়ণগঞ্জ সিটি কর্পোরেশন নির্বাচন, ২০২২ এ ইলেক্ট্রনিক ভোটিং মেশিন (ইভিএম) এর
+                                    মাধ্যমে ভোটগ্রহণ সংক্রান্ত পরিপত্র
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    <i class="fa fa-chevron-right"></i>
+                                    ০৫ টি পৌরসভার সাধারণ নির্বাচন ইলেক্ট্রনিক ভোটিং মেশিন (ইভিএম) এর মাধ্যমে ভোটগ্রহণ
+                                    সংক্রান্ত পরিপত্র
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    <i class="fa fa-chevron-right"></i>
+                                    আগামী ১৬ জানুয়ারি, ২০২২ খ্রিঃ তারিখে অনুষ্ঠিতব্য পৌরসভা নির্বাচন উপলক্ষে বিজ্ঞ
+                                    জুডিসিয়াল ম্যাজিস্ট্রেটগণের নিয়োগ সংক্রান্ত প্রজ্ঞাপন
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    <i class="fa fa-chevron-right"></i>
+                                    নারায়ণগঞ্জ সিটি কর্পোরেশন নির্বাচনে নির্বাচনি বিরোধ সংক্রান্ত দরখাস্ত/ আপিল গ্রহণ,
+                                    শুনানি ও নিষ্পত্তির লক্ষ্যে "নির্বাচনি ট্রাইব্যুনাল" ও "নির্বাচনি আপিল ট্রাইব্যুনাল"
+                                    গঠন সংক্রান্ত প্রজ্ঞাপন
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    <i class="fa fa-chevron-right"></i>
+                                    একাদশ জাতীয় সংসদের শূন্য ঘোষিত ১৩৬ টাঙ্গাইল-৭ আসনে নির্বাচন উপলক্ষে বিজ্ঞ জুডিসিয়াল
+                                    ম্যাজিস্ট্রেট নিয়োগ সংক্রান্ত প্রজ্ঞাপন
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link">
+                                    <i class="fa fa-chevron-right"></i>
+                                    নারায়ণগঞ্জ সিটি কর্পোরেশন নির্বাচন উপলক্ষে বিজ্ঞ জুডিসিয়াল ম্যাজিস্ট্রেটগণের নিয়োগ
+                                    সংক্রান্ত প্রজ্ঞাপন
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
                 <div class="card commission">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-dark text-white">
                         Election commission
                     </div>
                     <div class="card-body">
