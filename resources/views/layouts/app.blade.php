@@ -96,7 +96,7 @@
                         {{--                            @endif--}}
                     @else
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('published.elections') }}">Elections</a>
+                            <a class="nav-link text-white" href="{{ route('published.elections') }}">Results</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('candidates.list') }}">Candidates</a>
