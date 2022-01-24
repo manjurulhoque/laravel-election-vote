@@ -33,14 +33,25 @@
         .cards .card-img-top {
             height: 170px;
         }
+
+        .nav-item a {
+            font-size: 22px;
+        }
+
+        .navbar .navbar-nav > li > a:hover,
+        .navbar .navbar-nav > li > a:focus {
+            color: #393636 !important;
+            background-color: yellow;
+        }
+
     </style>
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm py-0">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                {{ config('app.name', 'Home') }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -108,6 +119,10 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                @if(auth()->user()->role == 'voter')
+                                    <a class="dropdown-item" href="{{ route('voter.profile') }}">My Profile</a>
+                                @endif
 
                                 @if(auth()->user()->role == 'candidate')
                                     <a class="dropdown-item" href="{{ route('posts.index') }}">Posts</a>

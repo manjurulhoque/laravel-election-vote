@@ -62,3 +62,4 @@ Route::get('election-commission', [\App\Http\Controllers\ElectionCommissionContr
 Route::get('elections-by-type/{type}', [\App\Http\Controllers\ElectionController::class, 'election_type'])->name('elections.by.type');
 Route::get('publish-result/{id}', [\App\Http\Controllers\ElectionController::class, 'publish_result'])->name('publish.result')->middleware(['auth', 'election-commission']);
 Route::get('published-elections', [\App\Http\Controllers\ElectionController::class, 'published_elections'])->name('published.elections')->middleware(['auth']);
+Route::get('voter-profile', [App\Http\Controllers\VoterController::class, 'profile'])->name('voter.profile');

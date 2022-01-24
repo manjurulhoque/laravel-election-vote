@@ -133,7 +133,7 @@ class HomeController extends Controller
             'role' => $request->get('role'),
         ]);
 
-        return redirect()->route('login')->with('success', 'Successfully registered as voter');
+        return redirect()->route('login')->with('success', 'Successfully registered as party');
     }
 
     public function candidates()
