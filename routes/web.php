@@ -49,6 +49,7 @@ Route::get('select-candidate/{id}', [\App\Http\Controllers\PartyCandidateControl
 Route::get('voters', [\App\Http\Controllers\ElectionCommissionController::class, 'voter_list'])->name('voter.list');
 Route::resource('notices', \App\Http\Controllers\NoticeBoardController::class);
 Route::resource('elections', \App\Http\Controllers\ElectionController::class);
+Route::get('elections/{id}/delete', [\App\Http\Controllers\ElectionController::class, 'delete'])->name('election.delete');
 Route::get('upload-profile-image', [\App\Http\Controllers\HomeController::class, 'upload_profile_image'])->name('upload.profile.image');
 Route::put('upload-profile-image', [\App\Http\Controllers\HomeController::class, 'save_profile_image'])->name('store.profile.image');
 Route::get('party-profile/{id}', [\App\Http\Controllers\PartyController::class, 'party_profile'])->name('party.profile');

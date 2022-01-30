@@ -15,6 +15,7 @@
                         <a href="{{ route('vote.count', $election->id) }}" class="btn btn-outline-dark btn-sm">Vote count</a>
                         <a href="{{ route('elections.show', $election->id) }}" class="btn btn-outline-success btn-sm">View</a>
                         <a href="{{ route('elections.edit', $election->id) }}" class="btn btn-outline-primary btn-sm">Edit</a>
+                        <a href="{{ route('election.delete', $election->id) }}" class="btn btn-outline-danger btn-sm">Delete</a>
                     </div>
                 </div>
             </div>

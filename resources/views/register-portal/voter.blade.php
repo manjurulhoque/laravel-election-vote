@@ -61,7 +61,7 @@
                                 <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Age') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="age" type="number" max="100"
+                                    <input id="age" min="18" type="number" max="100"
                                            class="form-control @error('age') is-invalid @enderror" name="age"
                                            value="{{ old('age') }}" required autocomplete="age">
 

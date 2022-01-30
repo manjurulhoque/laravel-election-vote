@@ -5,7 +5,6 @@
     <div class="card">
         <div class="card-header">
             <h6 class="text-left">Profile of <b>{{$voter->name}}</b></h6>
-{{--            <a href="{{ route('candidate.profile.edit') }}" class="text-right btn btn-success">Update</a>--}}
         </div>
         <div class="card-body">
             <p>Name: {{$voter->name}}</p>
@@ -13,7 +12,7 @@
             <p>Age: {{$voter->age}}</p>
             <p>Gender: {{$voter->gender}}</p>
             <p>NID: {{$voter->nid}}</p>
-            <p>Image:</p>
+            <p>Image: <a href="{{ route('upload.profile.image') }}" class="text-right btn btn-success">Update</a></p>
             @if(!isset($voter->image))
                 <img src="{{ asset('img/default.png') }}" alt="">
             @else

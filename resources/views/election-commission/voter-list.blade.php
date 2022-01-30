@@ -12,6 +12,11 @@
                 <th>Image</th>
                 <th>City</th>
                 <th>Address</th>
+                <th>Age</th>
+                <th>Date of birth</th>
+                <th>Gender</th>
+                <th>NID</th>
+                <th>Mobile</th>
             </tr>
             </thead>
             <tbody>
@@ -28,6 +33,11 @@
                     </td>
                     <td>{{$voter->city}}
                     <td>{{$voter->mobie}}
+                    <td>{{$voter->age}}
+                    <td>{{$voter->dob}}
+                    <td>{{$voter->gender}}
+                    <td>{{$voter->nid}}
+                    <td>{{$voter->mobile}}
                 </tr>
             @empty
                 <tr>

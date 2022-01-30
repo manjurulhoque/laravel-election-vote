@@ -6,6 +6,7 @@ use App\Models\Election;
 use App\Models\NoticeBoard;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -49,9 +50,17 @@ class HomeController extends Controller
             'nid' => ['required', 'string'],
             'mobile' => ['required'],
             'age' => ['required'],
-            'dob' => ['required', 'date'],
+            'dob' => ['required', 'date','before:18 years ago'],
             'gender' => ['required', 'in:male,female'],
+        ], [
+            'dob.before' => 'User must be 18 years old'
         ]);
+
+        // age validation
+//        $age = Carbon::parse($request->get('dob'))->age;
+//        if ($age < 18) {
+//            return
+//        }
 
         User::create([
             'name' => $request->get('name'),

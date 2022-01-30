@@ -87,9 +87,11 @@ class ElectionController extends Controller
         return redirect(route('elections.index'))->with('success', "Election is updated");
     }
 
-    public function destroy(Election $election)
+    public function delete($id)
     {
-        //
+        $election = Election::where('id', $id)->first();
+        $election->delete();
+        return back()->with('success', 'Election deleted');
     }
 
     public function vote_now($id)
