@@ -82,10 +82,11 @@
                             <img class="card-img-top" src="{{ asset('img/1.jpg') }}" alt="Card image cap">
                             <div class="card-body">
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum
-                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                    printer took a galley of type and scrambled it to make a type specimen book.
+                                    Our lives have been upended as a result of the coronavirus pandemic. Similarly,
+                                    elections around the world have been postponed or are in danger of being postponed
+                                    as a result of the Covid-19 situation. In today's world, a genuine, fair, and
+                                    acceptable face-to-face election is extremely rare. That is why an online election
+                                    management system is a critical issue to address.
                                 </p>
                             </div>
                         </div>
@@ -95,10 +96,11 @@
                             <img class="card-img-top" src="{{ asset('img/2.jpg') }}" alt="Card image cap">
                             <div class="card-body">
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum
-                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                    printer took a galley of type and scrambled it to make a type specimen book.
+                                    Providing election-related updates to political parties and candidates. In a
+                                    pandemic situation, the smooth conduct of election-related activities with the least
+                                    amount of public gathering is essential. Corrections to the nomination, manifesto,
+                                    and vote count. Streamlining the Election Commission's Work reducing pen-and-paper
+                                    activity Providing transparency.
                                 </p>
                             </div>
                         </div>
@@ -108,10 +110,10 @@
                             <img class="card-img-top" src="{{ asset('img/3.jpeg') }}" alt="Card image cap">
                             <div class="card-body">
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                                    Ipsum
-                                    has been the industry's standard dummy text ever since the 1500s, when an unknown
-                                    printer took a galley of type and scrambled it to make a type specimen book.
+                                    It is a platform where anyone can vote for their preferred candidate. Not everyone
+                                    will want to go to the polls during COVID-19, but voters will be able to vote online
+                                    from their respective locations. Hopefully, we will be able to reduce the complexity
+                                    of Bangladesh's elections as a result of this project.
                                 </p>
                             </div>
                         </div>
