@@ -155,36 +155,36 @@ class ElectionController extends Controller
 
         $dt = Carbon::now();
 
-        if ($dt >= $start_date && $dt <= $end_date) {
+//        if ($dt >= $start_date && $dt <= $end_date) {
 
-            $candidate = User::findOrFail($candidate_id);
+        $candidate = User::findOrFail($candidate_id);
 
-            $vote_exists = ElectionResult::where([
-                'election_id' => $election->id,
-                'user_id' => auth()->id(),
-                'candidate_id' => $candidate->id,
-            ])->exists();
+        $vote_exists = ElectionResult::where([
+            'election_id' => $election->id,
+            'user_id' => auth()->id(),
+            'candidate_id' => $candidate->id,
+        ])->exists();
 
-            if ($vote_exists) return back()->with('warning', 'You already voted this candidate');
+        if ($vote_exists) return back()->with('warning', 'You already voted this candidate');
 
-            if (ElectionResult::where([
-                'election_id' => $election->id,
-                'user_id' => auth()->id(),
-            ])->exists()) {
-                return back()->with('warning', 'Your vote is already counted');
-            }
-
-            $vote = ElectionResult::create([
-                'election_id' => $election->id,
-                'user_id' => auth()->id(),
-                'candidate_id' => $candidate->id,
-                'party_id' => $candidate->party_id,
-            ]);
-
-            return back()->with('success', 'Your vote successfully counted');
-        } else {
-            return back()->with('warning', "Election isn't started yet or finished");
+        if (ElectionResult::where([
+            'election_id' => $election->id,
+            'user_id' => auth()->id(),
+        ])->exists()) {
+            return back()->with('warning', 'Your vote is already counted');
         }
+
+        $vote = ElectionResult::create([
+            'election_id' => $election->id,
+            'user_id' => auth()->id(),
+            'candidate_id' => $candidate->id,
+            'party_id' => $candidate->party_id,
+        ]);
+
+        return back()->with('success', 'Your vote successfully counted');
+//        } else {
+//            return back()->with('warning', "Election isn't started yet or finished");
+//        }
     }
 
     public function election_type($type)
